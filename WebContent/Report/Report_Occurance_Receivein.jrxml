@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_Occurance" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13a4607f-6321-4792-b226-29fb5fb66b03">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DeptID" class="java.lang.String"/>
+	<parameter name="BID" class="java.lang.String"/>
+	<parameter name="sDate" class="java.lang.String"/>
+	<parameter name="eDate" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\LENOVO\\Desktop\\CSSD\\ReportCSSD\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+          occurance.DocNo,
+          TIME(payout.CreateDate) AS timeDocDate,
+          department.DepName,
+          occurance.Remark,
+          occurance.RefDocNo,
+DATE_FORMAT(payout.CreateDate,'%d-%m-%Y') AS DocDate,
+DATE_FORMAT(payout.CreateDate,'%d') AS Date,
+          CONCAT(employee.FirstName,' ',employee.LastName) AS Emp,
+          DATE_FORMAT(DATE(NOW()),'%d') AS DATE1,
+CASE WHEN MONTH (DATE(NOW())) = 01 THEN "มกราคม"
+     WHEN MONTH (DATE(NOW())) = 02  THEN "กุมภาพันธ์"
+     WHEN MONTH (DATE(NOW())) = 03 THEN "มีนาคม"
+     WHEN MONTH (DATE(NOW())) = 04 THEN "เมษายน"
+		 WHEN MONTH (DATE(NOW())) = 05 THEN "พฤษภาคม"
+		 WHEN MONTH (DATE(NOW())) = 06 THEN "มิถุนายน"
+		 WHEN MONTH (DATE(NOW())) = 07 THEN "กรกฏาคม"
+		 WHEN MONTH (DATE(NOW())) = 08 THEN "สิงหาคม"
+     WHEN MONTH (DATE(NOW())) = 09 THEN "กันยายน"
+     WHEN MONTH(DATE(NOW())) = 10 THEN "ตุลาคม"
+		 WHEN MONTH (DATE(NOW())) =  11 THEN "พฤศจิกายน"
+		 WHEN MONTH (DATE(NOW())) =  12 THEN "ธันวาคม"
+ELSE '' END  AS 'MonthName',
+DATE_FORMAT(DATE_ADD(DATE(NOW()),INTERVAL  543 YEAR),'%Y') AS DATEYear,
+DATE_FORMAT(DATE(occurance.DocDate),'%d') AS DATE2,CASE WHEN MONTH(occurance.DocDate) = 1 THEN "มกราคม"
+     WHEN MONTH(occurance.DocDate) = 2  THEN "กุมภาพันธ์"
+     WHEN MONTH(occurance.DocDate) = 3 THEN "มีนาคม"
+     WHEN MONTH(occurance.DocDate) = 4 THEN "เมษายน"
+		 WHEN MONTH(occurance.DocDate) = 5 THEN "พฤษภาคม"
+		 WHEN MONTH(occurance.DocDate) = 6 THEN "มิถุนายน"
+		 WHEN MONTH(occurance.DocDate) = 7 THEN "กรกฏาคม"
+		 WHEN MONTH(occurance.DocDate) = 8 THEN "สิงหาคม"
+     WHEN MONTH(occurance.DocDate) = 9 THEN "กันยายน"
+     WHEN MONTH(occurance.DocDate) = 10 THEN "ตุลาคม"
+		 WHEN MONTH(occurance.DocDate) =  11 THEN "พฤศจิกายน"
+		 WHEN MONTH(occurance.DocDate) =  12 THEN "ธันวาคม"
+ELSE '' END  AS 'MonthName1',
+DATE_FORMAT(DATE_ADD(DATE(occurance.DocDate),INTERVAL  543 YEAR),'%Y') AS DATEYear1
+        FROM
+        occurance
+        LEFT JOIN department ON occurance.DepID = department.ID
+        LEFT JOIN payout ON occurance.RefDocNo = payout.DocNo
+        LEFT JOIN users ON payout.UserCode = users.ID
+				LEFT JOIN employee ON employee.EmpCode = users.EmpCode
+        WHERE occurance.DepID = $P{DeptID}
+        AND occurance.B_ID = $P{BID}
+        AND DATE(occurance.DocDate) BETWEEN DATE($P{sDate}) AND DATE($P{eDate})
+        AND occurance.IsWeb = 1
+        GROUP BY occurance.DocNo]]>
+	</queryString>
+	<field name="DocNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="timeDocDate" class="java.sql.Time"/>
+	<field name="DepName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Remark" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RefDocNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DocDate" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Date" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Emp" class="java.lang.String"/>
+	<field name="DATE1" class="java.lang.String"/>
+	<field name="MonthName" class="java.lang.String"/>
+	<field name="DATEYear" class="java.lang.String"/>
+	<field name="DATE2" class="java.lang.String"/>
+	<field name="MonthName1" class="java.lang.String"/>
+	<field name="DATEYear1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="74" splitType="Stretch">
+			<staticText>
+				<reportElement x="171" y="28" width="261" height="25" uuid="0e23faea-a966-40d8-baf1-a000c6cd7068"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="21" isBold="true"/>
+				</textElement>
+				<text><![CDATA[รายงานรับของเข้าสต๊อกประเภทความเสี่ยง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="53" width="31" height="21" uuid="4baea1fc-d57b-4c14-9112-5ede9a609023"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ตั้งแต่]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="53" width="31" height="21" uuid="d26d0615-804c-46c7-8bb4-b465210a64b6"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ถึง]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="204" y="53" width="123" height="21" uuid="44f5bfe3-6161-4bf1-b257-362df451237e"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["วันที่"+" "+$P{sDate}.substring( 8,10 ) +
+if($P{sDate}.substring(5,7).equals("01"))]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="312" y="53" width="123" height="21" uuid="52a5f483-f5b6-4897-975d-d060a2aa99b3"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["วันที่"+" "+$P{eDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="458" y="8" width="39" height="20" uuid="f34d9894-3e4d-4554-a59e-f5d50c523fcc"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATE1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="471" y="8" width="66" height="20" uuid="f3c94951-b0ec-4b41-b7ac-12c9a93368bf"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MonthName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="503" y="8" width="52" height="20" uuid="3620f623-b53a-43a8-a951-d91f3ce1d9fc"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["พ.ศ."+ $F{DATEYear}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="401" y="8" width="59" height="20" uuid="02157890-da2e-4714-b0ad-61f53880692c"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<text><![CDATA[วันที่พิมพ์รายงาน]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="146" splitType="Stretch">
+			<staticText>
+				<reportElement x="55" y="36" width="61" height="20" uuid="c4a1ff97-d4f9-4cbe-a63a-1360ecc7dcf5"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[วันที่เอกสาร :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="64" width="61" height="20" uuid="906c28f0-6eeb-4e0e-9a43-6a93f4d11ac0"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[เลขที่เอกสาร :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="36" width="28" height="20" uuid="b966a050-ba7a-42fb-a0be-e7040a575909"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[เวลา :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="64" width="85" height="20" uuid="8fe6ef88-606f-4b43-bbf7-5b2566eb679a"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[เลขที่เอกสารอ้างอิง :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="64" width="43" height="20" uuid="e0a1f00b-c880-43d0-8da7-1e3b98294cad"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ชื่อผู้จ่าย :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="116" y="36" width="72" height="20" uuid="b9bd07c9-d38e-427f-9ccf-580692f6f5d1"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DocDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="64" width="72" height="20" uuid="143199cc-ad5e-4e3a-8e86-e15f7ae48098"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DocNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="36" width="72" height="20" uuid="2b86100f-36d2-46e7-a0a8-e527fa7a1c7d"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{timeDocDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="64" width="72" height="20" uuid="ce1fc19f-0010-412c-bc1a-a2e5bf8bf73b"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RefDocNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="64" width="72" height="20" uuid="06195542-27da-40f4-bd70-86b7c5da869b"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Emp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="53" y="105" width="61" height="21" uuid="61723fb7-700c-487f-bbf5-06718aa7e863"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ลำดับที่]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="105" width="103" height="21" uuid="14c0abf5-bb0e-4329-9a8e-f7ede15fb4f1"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[รหัสใช้งาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="105" width="103" height="21" uuid="bc4de913-b0a1-4b1f-b46b-0ac2e2c1d74f"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ชื่ออุปกรณ์]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="105" width="160" height="21" uuid="aea56a0b-24c8-4e6d-9cbc-491e5988a1f7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ประเภทความเสี่ยง]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="53" y="126" width="427" height="20" uuid="c3169b35-1917-4e28-943a-b7dcbdcb1b73"/>
+				<subreportParameter name="BID">
+					<subreportParameterExpression><![CDATA[$P{BID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DeptID">
+					<subreportParameterExpression><![CDATA[$P{DeptID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DocNo">
+					<subreportParameterExpression><![CDATA[$F{DocNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="eDate">
+					<subreportParameterExpression><![CDATA[$P{eDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sDate">
+					<subreportParameterExpression><![CDATA[$P{sDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Report_Occurance_Receivein_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15">
+			<textField evaluationTime="Report">
+				<reportElement x="557" y="0" width="23" height="15" uuid="b226b9bd-7c2f-4ad8-a237-c77fabe2de27"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="524" y="0" width="33" height="15" uuid="af35ae8a-aee4-4652-b148-6ce887b18fab"/>
+				<textElement textAlignment="Right">
+					<font fontName="TH SarabunPSK" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["หน้า"+$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

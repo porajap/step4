@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_Traceability" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb46a652-2f67-4e92-b0e1-64b09afb4955">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="HNCode" class="java.lang.String"/>
+	<parameter name="UsageCode" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\LENOVO\\Desktop\\CSSD\\ReportCSSD\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+        hotpitalnumber.HnCode,
+        hotpitalnumber.FName,
+        hotpitalnumber.HnAge,
+        itemstock.UsageCode,
+DATE_FORMAT(hotpitalnumber.CreateDate,'%d/%m/%Y')AS DocDate,
+DATE_FORMAT(DATE(NOW()),'%d') AS DATE1,
+CASE WHEN MONTH (DATE(NOW())) = 01 THEN "มกราคม"
+     WHEN MONTH (DATE(NOW())) = 02  THEN "กุมภาพันธ์"
+     WHEN MONTH (DATE(NOW())) = 03 THEN "มีนาคม"
+     WHEN MONTH (DATE(NOW())) = 04 THEN "เมษายน"
+		 WHEN MONTH (DATE(NOW())) = 05 THEN "พฤษภาคม"
+		 WHEN MONTH (DATE(NOW())) = 06 THEN "มิถุนายน"
+		 WHEN MONTH (DATE(NOW())) = 07 THEN "กรกฏาคม"
+		 WHEN MONTH (DATE(NOW())) = 08 THEN "สิงหาคม"
+     WHEN MONTH (DATE(NOW())) = 09 THEN "กันยายน"
+     WHEN MONTH(DATE(NOW())) = 10 THEN "ตุลาคม"
+		 WHEN MONTH (DATE(NOW())) =  11 THEN "พฤศจิกายน"
+		 WHEN MONTH (DATE(NOW())) =  12 THEN "ธันวาคม"
+ELSE '' END  AS 'MonthName1',
+DATE_FORMAT(DATE_ADD(DATE(DATE(NOW())),INTERVAL  543 YEAR),'%Y') AS DATEYear1
+        FROM
+        hotpitalnumber
+INNER JOIN hncode ON hncode.HnCode = hotpitalnumber.HnCode
+INNER JOIN itemstock ON itemstock.B_ID = hncode.B_ID
+    WHERE hotpitalnumber.HnCode = $P{HNCode}
+AND itemstock.UsageCode = $P{UsageCode}
+LIMIT 0,1]]>
+	</queryString>
+	<field name="HnCode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="HnAge" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="UsageCode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DocDate" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DATE1" class="java.lang.String"/>
+	<field name="MonthName1" class="java.lang.String"/>
+	<field name="DATEYear1" class="java.lang.String"/>
+	<title>
+		<band height="209" splitType="Stretch">
+			<staticText>
+				<reportElement x="95" y="47" width="345" height="25" uuid="cf17cfda-8805-4acd-beb5-22a04887ce1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="21" isBold="true"/>
+				</textElement>
+				<text><![CDATA[รานงานตรวจสอบย้อนกลับ HN คนไข้]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="10" width="59" height="20" uuid="feb2e735-e0e8-471e-9439-cad211611dcf"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<text><![CDATA[วันที่พิมพ์รายงาน]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="471" y="10" width="66" height="20" uuid="1581d536-facb-47d9-9284-70bcc6c26418"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MonthName1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="503" y="10" width="52" height="20" uuid="48874300-0db2-471a-9932-f0ae6eab035d"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["พ.ศ."+ $F{DATEYear1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="10" width="39" height="20" uuid="f7471e4d-6f94-4aeb-934e-506840dff22e"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATE1}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="14" y="90" width="523" height="117" uuid="c202ea05-6543-41a7-91f5-4fa3807fe793"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="39" y="108" width="42" height="20" uuid="dd3dd85e-64ad-45d6-83aa-31c1d6b0cdd1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<text><![CDATA[รหัสคนไข้ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="141" width="42" height="20" uuid="d36c1567-8373-4d92-87ab-13aadf2d2ad5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ชื่อคนไข้ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="174" width="56" height="20" uuid="a86b898f-6a45-42a5-becb-5e5c2832d98e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<text><![CDATA[วันรับบริการ :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="81" y="108" width="100" height="20" uuid="9587eb49-9f76-4069-8a6c-87209263e47d"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HnCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="141" width="174" height="20" uuid="39256850-3e75-4186-b17a-fc254b9923d5"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="174" width="100" height="20" uuid="4d810b14-9528-4ce3-9888-70d591d41534"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DocDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="23" uuid="763dc7f0-91c5-4da8-b321-098f89285366"/>
+				<subreportParameter name="HNCode">
+					<subreportParameterExpression><![CDATA[$P{HNCode}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="UsageCode">
+					<subreportParameterExpression><![CDATA[$P{UsageCode}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Report_Traceability_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

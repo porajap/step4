@@ -1,0 +1,45 @@
+<?page title="เข้าสู่ระบบ" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<window id="i" width="100%" height="100%" use="process.login"  >
+		<borderlayout>
+			<north height="100%">
+				<hlayout>
+					<vlayout>
+						<hlayout>
+							<image src="assets/dist/img/logo.png" />
+						</hlayout>
+						<label>เข้าสู่ระบบ</label>
+						<hlayout>
+							<label>ชื่อผู้ใช้งาน</label>
+							<textbox id="inputUsername" />
+						</hlayout>
+						<hlayout>
+							<label>รหัสผ่าน</label>
+							<textbox id="inputPassword" />
+						</hlayout>
+						<hlayout>
+							<combobox id="ComboboxSelect">
+								<comboitem label="กรุณาเลือตึก"
+									value="0" />
+								<comboitem label="ตึกศูนย์การแพทย์"
+									value="1" />
+								<comboitem label="ตึกเหนือ" value="2" />
+							</combobox>
+						</hlayout>
+
+						<hlayout>
+							<button id="btn_login" label="เข้าสู่ระบบ"
+								onClick="" />
+						</hlayout>
+						<hlayout>
+							<image src="assets/dist/img/background.png" />
+						</hlayout>
+					</vlayout>
+				</hlayout>
+			</north>
+		</borderlayout>
+
+
+	</window>
+</zk>

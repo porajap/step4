@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_Receivein" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b10841bf-d218-484c-8323-9b3c7f99c387">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sDate" class="java.lang.String"/>
+	<parameter name="DeptID" class="java.lang.String"/>
+	<parameter name="BID" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\LENOVO\\Desktop\\CSSD\\ReportCSSD\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+sendsterile.DocNo,
+department.DepName,
+sendsterile.IsStatus,
+sendsteriledetail.ResterileType,
+DATE(sendsterile.DocDate) AS DocDate,
+buildg.BdName,
+DATE_FORMAT(DATE(NOW()),'%d') AS DATE,
+CASE WHEN MONTH (DATE(NOW())) = 01 THEN "มกราคม"
+     WHEN MONTH (DATE(NOW())) = 02  THEN "กุมภาพันธ์"
+     WHEN MONTH (DATE(NOW())) = 03 THEN "มีนาคม"
+     WHEN MONTH (DATE(NOW())) = 04 THEN "เมษายน"
+		 WHEN MONTH (DATE(NOW())) = 05 THEN "พฤษภาคม"
+		 WHEN MONTH (DATE(NOW())) = 06 THEN "มิถุนายน"
+		 WHEN MONTH (DATE(NOW())) = 07 THEN "กรกฏาคม"
+		 WHEN MONTH (DATE(NOW())) = 08 THEN "สิงหาคม"
+     WHEN MONTH (DATE(NOW())) = 09 THEN "กันยายน"
+     WHEN MONTH(DATE(NOW())) = 10 THEN "ตุลาคม"
+		 WHEN MONTH (DATE(NOW())) =  11 THEN "พฤศจิกายน"
+		 WHEN MONTH (DATE(NOW())) =  12 THEN "ธันวาคม"
+ELSE '' END  AS 'MonthName',
+DATE_FORMAT(DATE_ADD(DATE(NOW()),INTERVAL  543 YEAR),'%Y') AS DATEYear,
+DATE_FORMAT(sendsterile.DocDate,'%d') AS DATE1,
+CASE WHEN MONTH(sendsterile.DocDate) = 1 THEN "มกราคม"
+     WHEN MONTH(sendsterile.DocDate) = 2  THEN "กุมภาพันธ์"
+     WHEN MONTH(sendsterile.DocDate) = 3 THEN "มีนาคม"
+     WHEN MONTH(sendsterile.DocDate) = 4 THEN "เมษายน"
+		 WHEN MONTH(sendsterile.DocDate) = 5 THEN "พฤษภาคม"
+		 WHEN MONTH(sendsterile.DocDate) = 6 THEN "มิถุนายน"
+		 WHEN MONTH(sendsterile.DocDate) = 7 THEN "กรกฏาคม"
+		 WHEN MONTH(sendsterile.DocDate) = 8 THEN "สิงหาคม"
+     WHEN MONTH(sendsterile.DocDate) = 09 THEN "กันยายน"
+     WHEN MONTH(sendsterile.DocDate) = 10 THEN "ตุลาคม"
+		 WHEN MONTH(sendsterile.DocDate)=  11 THEN "พฤศจิกายน"
+		 WHEN MONTH(sendsterile.DocDate) =  12 THEN "ธันวาคม"
+ELSE '' END  AS 'MonthName1',
+DATE_FORMAT(DATE_ADD(DATE(sendsterile.DocDate),INTERVAL  543 YEAR),'%Y') AS DATEYear1
+FROM
+sendsterile
+INNER JOIN department ON sendsterile.DeptID = department.ID
+INNER JOIN sendsteriledetail ON sendsterile.DocNo = sendsteriledetail.SendSterileDocNo
+INNER JOIN buildg ON buildg.ID = sendsterile.B_ID
+WHERE
+DATE(sendsterile.DocDate) = DATE($P{sDate})
+AND sendsterile.DeptID = $P{DeptID}
+AND sendsterile.B_ID = $P{BID}
+AND sendsterile.IsCancel = 0
+AND (sendsterile.IsStatus = 1 OR sendsterile.IsStatus = 2 OR sendsterile.IsStatus = 0)
+AND sendsterile.IsWashDept = 0
+GROUP BY sendsterile.DocNo
+ORDER BY sendsterile.DeptID ASC]]>
+	</queryString>
+	<field name="DocNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DepName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IsStatus" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ResterileType" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DocDate" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="BdName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DATE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MonthName" class="java.lang.String"/>
+	<field name="DATEYear" class="java.lang.String"/>
+	<field name="DATE1" class="java.lang.String"/>
+	<field name="MonthName1" class="java.lang.String"/>
+	<field name="DATEYear1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="401" y="0" width="59" height="20" uuid="df1fa1e2-dd19-4321-947a-3bc2197249c2"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<text><![CDATA[วันที่พิมพ์รายงาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="54" width="60" height="25" uuid="51900dcf-cd88-47a5-83bd-b457e4a9a16a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ตึก :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="243" y="54" width="177" height="25" uuid="64374cfa-1a99-42de-b450-2ea642af754f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BdName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="0" width="39" height="20" uuid="9ccef5c8-61ce-4d43-8af6-95763f08283b"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="471" y="0" width="66" height="20" uuid="abe3a3b8-1f26-4323-8141-7d53571078cf"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MonthName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="503" y="0" width="52" height="20" uuid="b9768524-3e8b-4130-b539-4b525cd84051"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["พ.ศ."+ $F{DATEYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="93" y="28" width="392" height="33" uuid="99b63be2-830a-41e4-8ae8-21cb4abc2bf1"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="21" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["สรุปรายงานส่งล้าง(ปกติ) ประจำวันที่"+" "+$F{DATE1}+" "+$F{MonthName1}+" "+$F{DATEYear1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="540" height="32" uuid="ffbb41a7-b07e-4f47-b41a-d66d7d5015be"/>
+				<subreportParameter name="BID">
+					<subreportParameterExpression><![CDATA[$P{BID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DeptID">
+					<subreportParameterExpression><![CDATA[$P{DeptID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DocNo">
+					<subreportParameterExpression><![CDATA[$F{DocNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sDate">
+					<subreportParameterExpression><![CDATA[$P{sDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Report_Sendsterile_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="484" y="0" width="33" height="15" uuid="a5dcfd2f-2045-400f-b433-d2460886770f"/>
+				<textElement textAlignment="Right">
+					<font fontName="TH SarabunPSK" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["หน้า"+$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="517" y="0" width="23" height="15" uuid="b9e21427-85cb-4e85-bdd2-0b9f8dfe8008"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="246">
+			<staticText>
+				<reportElement x="170" y="31" width="245" height="30" uuid="592d54cf-7862-4ba0-9400-084a0ae305c4"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="21" isBold="true"/>
+				</textElement>
+				<text><![CDATA[สรุปยอดรวมรายการส่งล้างรายวัน]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="79" width="548" height="34" uuid="f6145c7e-fd03-4113-a73f-a63be0543c49"/>
+				<subreportParameter name="BID">
+					<subreportParameterExpression><![CDATA[$P{BID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DeptID">
+					<subreportParameterExpression><![CDATA[$P{DeptID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sDate">
+					<subreportParameterExpression><![CDATA[$P{sDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Report_Sendsterile_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,44 @@
+<?page title="CSSD" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+
+<zk xmlns:w="client">
+	<style>
+		body, html { height: 100%; }
+
+		body { padding: 0 0; /* 0 padding on top and bottom and 0
+		padding on right and left */
+		<!-- background image -->
+		background-image: url('images/bg1.png');
+		background-position: right; background-repeat: no-repeat;
+		background-size: 70%; }
+		
+	</style>
+	
+	<script type="text/javascript" src="/js/jquery.watermarkinput.js" />
+
+	<div apply="com.poseintelligence.cssd.transaction.CssdLogin" align="center" height="100%" style="position:relative;top:150px;">
+	
+		<vlayout vflex="1" spacing="25px">
+		
+			<label value="POSE INTELLIGENCE" style="color: #333333;font-size:28px;font-weight:bold;"/>
+		
+			<label id="Label_Caption" value="เข้าสู่ระบบ" style="color: #333333;font-size:20px;" />
+			
+			<textbox id="Textbox_UserName" type="text" width="500px" style="text-align:center;color: #333333;font-size:18px;" w:onBind="jq(this).Watermark('ชื่อผู้ใช้งาน','gray')"/>
+			
+			<textbox id="Textbox_Password" type="password" width="500px" style="text-align:center;color: #333333;font-size:18px;" w:onBind="jq(this).Watermark('รหัสผ่าน','gray')"/>
+			
+			<combobox id="cboBID" width="500px" style="text-align:center;color: #333333;font-size:18px;" readonly="true">
+				<comboitem label="กรุณาเลือกตึก "  value="0" style="text-align:center;color: #333333;font-size:18px;" />
+				<comboitem label="ตึกศูนย์การแพทย์" value="1" style="text-align:center;color: #333333;font-size:18px;" />
+				<comboitem label="ตึกเหนือ" value="2" style="text-align:center;color: #333333;font-size:18px;" />
+			</combobox>
+			
+			<button id="Button_Submit" label="เข้าสู่ระบบ" width="200px" style="color:#ffffff;background: #0275d8;border-radius: 4px;"/>
+			
+			<label id="Label_DB" value="${param['db']}" visible="false" />
+		</vlayout>
+	</div>
+
+</zk>

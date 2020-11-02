@@ -1,0 +1,51 @@
+.float-container {
+  border: solid 1px #ccc;
+  padding: 0 8px;
+  position: relative;
+  width: 60%;
+  border-radius: 0px 5px 5px 0px;
+  border-width: 1px;
+  border-style: solid solid solid none;
+}
+
+.active {
+  border-color: #224099!important;
+}
+
+.float-container input {
+  border: none;
+  font-size: 16px;
+  margin: 16px 0 10px;
+  outline: 0;
+  width: 100%;
+}
+.float-container-select {
+  border: solid 1px #ccc;
+  padding: 0 8px;
+  position: relative;
+  width: 65.3%;
+  border-radius: 0px 5px 5px 0px;
+  border-width: 1px;
+  /* border-style: solid solid solid none; */
+}
+.float-container-select select {
+  border: none;
+  font-size: 16px;
+  margin: 16px 0 10px;
+  outline: 0;
+  width: 100% ;
+}
+.login-layout label {
+  font-size: 16px;
+  position: absolute;
+  transform-origin: top left;
+  transform: translate(0, 16px) scale(1);
+  transition: all 0.1s ease-in-out;
+  font-weight: 700;
+  color: #666666;
+}
+.float-container.active label {
+  color: #224099;
+  font-weight: 700;
+  transform: translate(0, 0px) scale(0.75);
+}

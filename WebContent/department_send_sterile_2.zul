@@ -1,0 +1,338 @@
+<?page title="CSSD" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+
+
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+<div id="head" use="com.poseintelligence.cssd.transaction.DepartmentSendSterile2">
+		<x:div class="row" >
+		 <x:div class="col-md-6">
+		  <x:div class="card">
+			<x:div class="card-header bg-primary text-white" style="font-weight:600">ส่งไป CSSD</x:div>
+		 	  <x:div class="card-body" style="max-height:770px;min-height:770px;">
+		 	    <x:div class="tab-pane fade show active" id="ss" role="tabpanel" aria-labelledby="ss-tab">
+		 	      <x:div class="row">
+                    <x:div class="col-md-12">
+                      <x:ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <x:li class="nav-item">
+                          <x:a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" style="font-weight:600">บันทึกส่ง</x:a>
+                        </x:li>
+                        <x:li class="nav-item">
+                          <x:a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" style="font-weight:600">เอกสารส่ง : ร่าง <x:span class="badge badge-danger right" id="cnt_doc"></x:span></x:a>
+
+                        </x:li>
+                      </x:ul>
+                    </x:div>
+                  </x:div>
+                  
+                   <x:div class="tab-content" id="myTabContent">
+                    <x:div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    
+		 			 <x:div class="row mt-3">
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">ค้นหาเครื่องมือ :</x:label>
+                          	<textbox id="Textbox_SearchItemStock"  sclass="form-control" placeholder="ค้นหาเครื่องมือ" />
+                          </x:div>
+                        </x:div>
+                        
+                        <x:div class="col-md-6 ">
+                          <x:div class='  text-black text-right' style="margin-top: 8.5%;">
+                            <button  id="Button_SearchItemStock" class="btn btn-primary"  style="width: 35%;" onClick="head.onDisplayItemStock()">ค้นหา</button>
+                            <button class="btn btn-info"  style="width: 35%;">ดูรายงาน</button>
+                          </x:div>
+                        </x:div>
+                      </x:div>
+                      
+                      
+		 			 <x:div class="row">
+                         <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">QRCODE :</x:label>
+                          	<textbox id="QRCODE"  sclass="form-control" placeholder="QRCODE" onOK="head.QrCodeClick()" />
+                          </x:div>
+                        </x:div>
+		                <x:div class="col-md-6  text-black text-right"  style="margin-top: 5.5%;">
+                          <button id="Button_Send"  class="btn btn-primary px-5" onClick="head.onConfirmSend()">นำเข้า</button>
+                        </x:div>
+                        
+                         <x:div class="col-12">
+	        			<div align="right" height="530px">
+	        			<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+			        		<listbox id="Listbox_ItemStock"  vflex="true" mold="paging" pageSize="20" multiple="true" checkmark="true">
+				        		<listhead>
+										<listheader label="" width="50px" align="center"></listheader>
+										<listheader label="รหัสใช้งาน" ></listheader>
+										<listheader label="ชื่ออุปกรณ์" ></listheader>
+										<listheader label="ExpireDate" ></listheader>
+			        			</listhead>
+			        		</listbox>
+			        	</vlayout>
+			        	</div>
+ 						</x:div>
+ 					  </x:div>
+ 					</x:div>
+ 					
+ 					
+ 					<x:div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      <x:br />
+                      <x:div class="row my-1 px-3">
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">ค้นหาเลขที่เอกสาร :</x:label>
+                            <textbox id="Textbox_SearchDocNo"  sclass="form-control" onOK="head.onDisplayDocument()"/>
+                          </x:div>
+                        </x:div>
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">วันที่ :</x:label>
+                            <datebox id="Datebox_SDocDate" width="300px" format="dd-MM-yyyy"  timeZone="UTC+7" />
+                          </x:div>
+                        </x:div>
+
+                      </x:div>
+
+                      <x:div class="row my-1 px-3 mb-3 mt-3">
+                        <x:div class="col-md-6 ">
+                        </x:div>
+                        <x:div class="col-md-6 ">
+                          <x:div class='text-black text-right'>
+                            <button  class="btn btn-primary px-5"  id="Button_SearchDocNo" onClick="head.onDisplayDocument()">ค้นหา</button>
+                          </x:div>
+                        </x:div>
+                      </x:div>
+                      
+                      	<x:div class="row">
+		 	               <x:div class="col-12">
+		 	           <div align="right" height="530px">
+	        			<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+       							   <listbox id="Listbox_Document" vflex="true"  mold="paging" pageSize="10" multiple="true" >
+									<listhead>
+										<listheader label="ลำดับ"     width="60px"  align="center"></listheader>
+										<listheader label="เลขที่เอกสาร"  width="150px"></listheader>
+										<listheader label="วันที่เอกสาร"  width="120px"></listheader>
+										<listheader label="จำนวน"    width="80px" align="center"></listheader>
+										<listheader label="สถานะ" ></listheader>
+									</listhead>
+								 </listbox>
+								</vlayout>
+			        	</div>
+ 						</x:div>
+                      
+					   </x:div>	
+                    </x:div>
+ 				  </x:div>	
+		 		</x:div>
+		 	  </x:div>
+		 	</x:div>
+		</x:div>
+	
+	
+		 <x:div class="col-md-6">
+		  <x:div class="card">
+			<x:div class="card-header bg-info text-white" style="font-weight:600">สรุปรายการ (ส่งไป CSSD)</x:div>
+		 	  <x:div class="card-body" style="max-height:1500px;min-height:770px;">
+		 	  
+		 			 <x:div class="row">
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">เลขที่เอกสาร :</x:label>
+                          	<textbox  sclass="form-control" placeholder="เลขที่เอกสาร" readonly="true" id="Textbox_Document" />
+                          </x:div>
+                        </x:div>
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">วันที่ :</x:label>
+                          	<textbox  sclass="form-control" placeholder="วันที่" readonly="true" id="Textbox_SSDate" />
+                          </x:div>
+                        </x:div>
+                      </x:div>
+                
+                      <x:div class="row my-1  px-3">
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">ประเภท :</x:label>
+                          		<combobox  value="แยกรายการ" readonly="true" id="Combobox_type" onBlur="head.Changetype()" >
+                          			<comboitem label="แยกรายการ" value="1"/>
+                          			<comboitem label="รวมรายการ" value="2"/>
+                          		</combobox>
+                          </x:div>
+                        </x:div>
+                        
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">พนักงาน :</x:label>
+                          		<combobox id="Combox_Employee" readonly="true"></combobox>
+                          </x:div>
+                        </x:div>
+                      </x:div>
+                      
+                       <x:div class="row my-1 px-3">
+                     		<x:div class="col-md-3 mt-3">
+							<checkbox  label="HN คนไข้" id="Checkbox_hn" onCheck="head.Checkbox_hn()"/>
+  							</x:div>
+  							<x:div class="col-md-3 mt-3" >
+							<checkbox  label="หมดอายุ " id="Checkbox_expire" onCheck="head.Checkbox_expire()"/>
+  							</x:div>
+  							<x:div class="col-md-3 mt-3">
+							<checkbox  label="ของด่วน " id="Check_ems" onCheck="head.Check_ems()"/>
+  							</x:div>
+                        
+                        <x:div class="col-md-3">
+                          <x:div class='form-group   text-black text-right'>
+                            <button  class="btn btn-info "  id="Button_addEmployee" style="width:90%;">เพิ่มพนักงาน</button>
+                          </x:div>
+                        </x:div>
+                      </x:div>
+                      
+
+                            <x:div class="row my-1 px-3">
+                              <x:div class="  col-md-6 ">
+                             </x:div>
+                             <x:div class="  col-md-6 text-right">
+                                <button  class="btn btn-danger "  id="Button_Cancel" style="width:35%;" onClick="head.Button_Cancel()">ยกเลิก</button>
+                                <button  class="btn btn-success " id="Button_SendSterile"  style="width:35%;" onClick="head.Button_SendSterile()">ส่ง</button>
+                             </x:div>
+                            </x:div>
+                            
+                            
+                   <x:div class="row">
+                     <x:div class="col-12">
+		 	           <div align="right" height="460px">
+	        			<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+       							   <listbox id="Listbox_DocumentDetail" vflex="1"  mold="paging" pageSize="8" multiple="true" style="white-space: nowrap;">
+									<listhead>
+										<listheader label="ลำดับ"  width="60px"    align="left"></listheader>
+										<listheader label="รหัสใช้งาน"  ></listheader>
+										<listheader label="รายการ"  ></listheader>
+										<listheader label="Ex"  width="60px"     align="center"></listheader>
+										<listheader label="Oc"  width="60px"     align="center"></listheader>									
+										<listheader label="Del" width="60px"     align="center"></listheader>
+										<listheader label="หมดอายุ" width="80px"    align="center"></listheader>
+										
+																			
+									</listhead>
+								 </listbox>
+								</vlayout>
+			        		</div>
+			        	  </x:div>
+ 						</x:div>
+        
+		 	 </x:div>
+		   </x:div>
+		 </x:div>
+		 
+		 
+	
+	</x:div>
+	<window id="Window_PopUp_hn_detail" use="com.poseintelligence.cssd.transaction.Hn_detail"  height="700px" width="950px" visible="false" border="normal" closable="false"  position="center,center" action="show: slideDown;hide: slideUp"  title="HN คนไข้" onClose="event.stopPropagation();self.setVisible(false);">
+   	       			 <x:div class="row">
+   	       			             <timer id="Time" delay="1"  repeats="false" onTimer="Window_PopUp_hn_detail.onDisplaywindow();"/>
+   	       			 
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">HN :</x:label>
+                          	<textbox  sclass="form-control" placeholder="HN" readonly="true"  id="Hn_detail" />
+                          </x:div>
+                        </x:div>
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">วันที่รับบริการ :</x:label>
+                          	<textbox  sclass="form-control" placeholder="บริการ" readonly="true" id="Date_detail" />
+                          </x:div>
+                        </x:div>
+                      </x:div>
+                      
+                       <x:div class="row">
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">ชื่อ - สกุล :</x:label>
+                          	<textbox  sclass="form-control" placeholder="ชื่อ - สกุล " readonly="true" id="LSName_detail" />
+                          </x:div>
+                        </x:div>
+                        <x:div class="col-md-6">
+                          <x:div class='form-group   text-black'>
+                            <x:label class=" form-label  h6">Operation :</x:label>
+                          	<textbox  sclass="form-control" placeholder="Operation" readonly="true" id="Operation_detail" />
+                          </x:div>
+                        </x:div>
+                      </x:div>
+                      
+                    <x:div class="row">
+                     <x:div class="col-12">
+		 	           <div align="right" height="360px">
+	        			<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+       							   <listbox id="Listbox_HnDetail" vflex="1"  mold="paging" pageSize="8" multiple="true" style="white-space: nowrap;">
+									<listhead>
+										<listheader label="ลำดับ"  width="60px"    align="left"></listheader>
+										<listheader label="รายการ"  ></listheader>
+										<listheader label="รหัสใช้งาน" ></listheader>
+										<listheader label="ลบ"   width="80px"  ></listheader>			
+									</listhead>
+								 </listbox>
+								</vlayout>
+			        		</div>
+			        	  </x:div>
+ 						</x:div>
+ 						
+			          <x:div class="row  mt-2 ">
+			           <x:div class="  col-md-12 text-right">
+			              <button  class="btn btn-success "   style="width:25%;"  onClick="head.successHN()">ส่ง</button>
+			           </x:div>
+			          </x:div>
+   	    	</window>
+	
+	   	   <window id="Window_PopUp_hn" use="com.poseintelligence.cssd.transaction.Hn"   height="500px" width="700px" visible="false" border="normal" closable="true"  position="center,center" action="show: slideDown;hide: slideUp"  title="HN คนไข้" onClose="event.stopPropagation();self.setVisible(false);">
+   	       <div class="row" style="padding-top: 25px;">
+            <div class="col-12">
+            
+            <timer id="Time" delay="1"  repeats="false" onTimer="Window_PopUp_hn.onDisplaywindow();"/>
+            
+              <div class='text-black '>
+                <x:label class=" form-label  h6">HN :</x:label>
+                  	    <combobox id="ComboboxNameHN" width="100%" style="background:#FFFFFF;color:#000000;" autodrop="true" buttonVisible="false" 
+                  	    		  x:autocomplete="off"
+                  	    		  onChanging="Window_PopUp_hn.defindName(event.value)"
+                  	    		  onFocus="ComboboxNameHN.select()" 
+								  onBlur="Window_PopUp_hn.onName()"
+                  	     />
+              </div>
+            </div>
+          </div>
+   	       <div class="row" style="padding-top: 25px;">
+            <div class="col-12">
+              <div class='text-black '>
+                <x:label class=" form-label  h6" >ชื่อคนไข้  :</x:label>
+                <textbox  sclass="form-control"   id="Textbox_hn_name"     />
+                              
+              </div>
+            </div>
+          </div>
+   	       <div class="row" style="padding-top: 25px;">
+            <div class="col-12">
+              <div class='text-black '>
+                <x:label class=" form-label  h6">Operation :</x:label>
+                <textbox  sclass="form-control"   id="Textbox_reception"      />
+              </div>
+            </div>
+          </div>
+          <x:div class="row  mt-5 ">
+           <x:div class="  col-md-12 text-right">
+              <button  class="btn btn-primary "   style="width:25%;"  id="Button_addHN">เพิ่มรายชื่อคนไข้</button>
+              <button  class="btn btn-primary "   style="width:25%;"  id="Button_saveHN" visible = "false" onClick="Window_PopUp_hn.CreateDocument_HN()">บันทึกHN</button>
+              <button  class="btn btn-secondary "  style="width:25%;" id="Button_deleteHN" onClick="head.DeleteHN()">ยกเลิกข้อมูล</button>
+           </x:div>
+          </x:div>
+   	    </window>
+	</div>
+
+
+   	    <window id="Window_PopUp_image" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+
+
+
+
+   	    <window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+   	
+
+</zk>

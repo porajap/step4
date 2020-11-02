@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_Receivein_subreport" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="26eaaf50-2feb-451c-9a17-af4b1903162f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DocNo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+itemstock.UsageCode,
+item.itemname,
+units.UnitName,
+payout.DocNo,
+payout.IsBorrowStatus,
+department.DepName2,
+CASE payout.IsBorrowStatus
+        WHEN '7' THEN
+          'รอคืน'
+        WHEN '8' THEN
+          'คืน (ค้างบางตัว)'
+        WHEN '9' THEN
+          'คืนครบ'
+        END AS borrowName,
+CASE detail.IsStatus
+              WHEN '0' THEN
+                'ไม่ได้คืน'
+              WHEN '1' THEN
+                'คืนแล้ว'
+              END AS StatusName
+FROM
+payoutdetail AS detail
+INNER JOIN itemstock ON detail.ItemStockID = itemstock.RowID
+INNER JOIN item ON itemstock.ItemCode = item.itemcode
+INNER JOIN units ON item.UnitID = units.ID
+INNER JOIN payout ON payout.DocNo = detail.DocNo
+INNER JOIN department ON department.ID = payout.DeptID
+WHERE
+detail.DocNo = $P{DocNo}]]>
+	</queryString>
+	<field name="UsageCode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="itemname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="UnitName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DocNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IsBorrowStatus" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DepName2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="borrowName" class="java.lang.String"/>
+	<field name="StatusName" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="20">
+			<textField>
+				<reportElement x="176" y="0" width="109" height="16" uuid="2541ee1c-8f29-425d-8bdf-2916cfb128b6"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["แผนก :"+" "+ $F{DepName2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="0" width="186" height="16" uuid="cf86d4ff-c45b-4614-9ddd-da72638b8f3a"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-> เลขที่เอกสาร :"+" "+ $F{DocNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="241" y="0" width="186" height="16" uuid="661cbf63-0a0b-4d13-a519-00c2f25061d6"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" สถานะการยืม :"+" "+ $F{borrowName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement x="242" y="0" width="233" height="21" uuid="bf61e016-2f16-4a91-9bb3-912f05588134"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ชื่ออุปกรณ์]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="0" width="151" height="21" uuid="334432e2-1513-4a35-b9ac-dc8eabf41444"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[รหัสใช้งาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="0" width="66" height="21" uuid="a56d0327-727d-43d9-a864-996e26933fbd"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ลำดับ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="0" width="56" height="21" uuid="5f23e13f-0789-4b00-af91-95562c16ae78"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[หน่วยนับ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="0" width="66" height="18" uuid="18e419fe-6728-4882-a323-bd1781b743fa"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="0" width="151" height="18" uuid="3f76490b-8014-488b-b820-e1a2cae61ccb"/>
+				<box leftPadding="3">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UsageCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="242" y="0" width="233" height="18" uuid="e29a6447-8c4d-4df8-a776-7b281fc8cc67"/>
+				<box leftPadding="3">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itemname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="57" height="18" uuid="18bd2f63-a585-4db3-86e1-a414385cc93c"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UnitName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

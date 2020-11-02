@@ -1,0 +1,443 @@
+<?page title="HN คนไข้" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<borderlayout id="report_HN"  height="100%" width="100%" style="background: #2e5fbd;" use="process.report_hn">
+
+	<center border="none"  >
+	<caption  style="background: #007bff; color:#FFFFFF;font-size:20px; border-radius: 5px;"  height="50px" width="100%" label="HN คนไข้"/> 
+	<tabbox  sclass="nav_tabs" id="s">
+        <tabs id="tabs">
+            <tab label="ประวัติการใช้อุปกรณ์"/>
+            <tab label="เอกสาร HN"/>         
+        </tabs>
+  <tabpanels>
+            <tabpanel>
+                <toolbar hflex="true">              
+		<vlayout>
+				<hlayout>
+					<label value="HN : "   ></label>
+				</hlayout>
+			<hlayout>
+						<combobox id="ComboboxNameHN" width="350px" style="background:#FFFFFF;color:#000000;"  
+												autodrop="true"
+												buttonVisible="false"
+												onChanging="report_HN.defindName( event.value )"
+												onBlur="report_HN.onName()"/>
+			</hlayout>
+			
+			<hlayout >
+					<label value="ช่วงวันที่ : "   ></label>	
+					<hlayout width="280px"></hlayout>
+					<label value="ถึง : "   ></label>	
+			</hlayout>
+			<hlayout>
+					<datebox id="SDatebox"  width="350px"  format="dd-MM-yyyy" style="background:#D3D3D3;" readonly="true"/>	
+					
+					<datebox id="EDatebox" width="350px" format="dd-MM-yyyy" style="background:#D3D3D3;" readonly="true"/>					
+			</hlayout>
+			
+			<hlayout>
+			<hlayout width="600px"></hlayout>
+					<button id="btnAdd" label="ค้นหา" width="100px" height="35px" disabled="false" style="background: #007BFF; color: #FFFFFF;" onClick="report_HN.onDisplayTab1()"/>
+			</hlayout>
+		
+			<vlayout height="850px">
+			<listbox id="ListboxHN" style="align:center; background-color:#FFFFFF; background:#FFFFFF; border-color:#FFFFFF;"
+					mold="paging" pageSize="25" height="850px" >		
+				<listhead style="background:#FFFFFF; background-color:#FFFFFF; border-color:#FFFFFF; ">
+					<listheader style="color:#000000; background:#FFFFFF;"   width="200px" label="ลำดับ" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="200px" label="วันที่รับบริการ" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="200px" label="รหัสใช้งาน" />
+					<listheader style="color:#000000; background:#FFFFFF;"  label="รายการ" />
+				</listhead>
+			</listbox>
+			</vlayout>
+		</vlayout>
+		</toolbar>
+		</tabpanel>
+	
+
+            <tabpanel>
+                <toolbar hflex="true" > 
+                
+			<vlayout>
+				<hlayout>
+					<label value="ช่วงวันที่ : "   ></label>
+					<hlayout width="240px"></hlayout>
+					<label value="ถึง : "   ></label>
+
+				</hlayout>
+			<hlayout>
+			<datebox id="SDateboxTab2" width="300px" format="dd-MM-yyyy" style="background:#D3D3D3;" readonly="true"/>
+			
+			<datebox id="EDateboxTab2" width="300px" format="dd-MM-yyyy" style="background:#D3D3D3;" readonly="true"/>
+			</hlayout>
+			
+			
+			<hlayout>
+						<hlayout width="500px"></hlayout>
+						<button id="btnSearchTab2" label="ค้นหา" width="100px" height="35px" onClick="report_HN.SearchData()"/>
+
+			</hlayout>
+
+			<vlayout height="850px">
+			
+			<listbox id="ListboxHNTab2" style="align:center; background-color:#FFFFFF; background:#FFFFFF; 	color:#FFFFFF;"
+					mold="paging" pageSize="20" height="700px">
+					
+				<listhead style="background:#FFFFFF; background-color:#FFFFFF; border-color:#FFFFFF; ">
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="ลำดับ" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="เลขที่เอกสาร" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="วันที่ใช้บริการ" />
+					<listheader style="color:#000000; background:#FFFFFF;"   label="HN" /> 
+				</listhead>
+			</listbox>
+			</vlayout>
+		</vlayout>
+		</toolbar>
+		</tabpanel>
+		</tabpanels>
+		
+		</tabbox>
+	</center>
+
+      
+	<east border="none" width="49%" >
+	<caption  style="background: #17a2b8; color:#FFFFFF;font-size:20px; border-radius: 5px;"  height="50px" width="100%" label="บันทึก HN ย้อนหลัง"/> 
+		<vlayout spacing="1px" vflex="true" >	
+		
+				<hlayout>
+					<hlayout width="500px"></hlayout>
+					<label value="รายเก่า  "   ></label>
+					<checkbox id="Checkbox_Mode" mold="switch" onClick="report_HN.onCheck()"/>
+					<label value="รายใหม่  "   ></label>
+					
+				</hlayout>
+				
+				<hlayout>
+					<label value="เลขที่เอกสาร : "   ></label>
+					<hlayout width="250px"></hlayout>
+					<label value="วันที่ : "   ></label>
+				</hlayout>	
+				
+			<hlayout>
+			<textbox id="TextboxDocNo" width="350px" readonly="true"/>
+			<datebox id="DateboxBefore" width="350px" format="dd-MM-yyyy" style="background:#D3D3D3;" readonly="true"/>
+			</hlayout>
+			
+			<hlayout>
+					<label value="HN : "   ></label>
+				</hlayout>	
+				
+			<hlayout>
+			<combobox id="ComboboxNameHN2" width="350px" style="background:#FFFFFF;color:#000000;"  
+												autodrop="true"
+												buttonVisible="false"
+												onChanging="report_HN.defindName2(event.value)"
+												onOK="ComboboxNameHN2.focus();ComboboxNameHN2.select()" 
+												onFocus="ComboboxNameHN2.select()" 
+												onBlur="report_HN.onName2()"/>
+												
+			<textbox id="TextboxNameHN2" width="650px" />
+												
+		
+			</hlayout>
+			
+			<hlayout>
+					<label  id="lb_Name" value="ชื่อ : "></label>
+				</hlayout>	
+			<hlayout>
+			<textbox id="TextboxNameHN" width="350px" readonly="false"/>
+			</hlayout>	
+				
+			<hlayout>
+			<hlayout width="600px"></hlayout>
+					<button id="btnAddEmp" label="บันทึก" width="100px" height="35px" onClick="report_HN.onUpdate();"/>
+			</hlayout>
+			
+			<hlayout>
+				<label value="รายการใช้อุปกรณ์ "></label>
+				<textbox id="TextboxQR" width="200px" readonly="false"/>
+				
+				<textbox id="TextboxQR2" width="400px" readonly="false"/>
+				<button id="btnStock" label="Stock" width="100px" height="35px" onClick="report_HN.oncheck_save()"/>
+			</hlayout>
+			
+			<listbox id="ListboxHNTotal" style="align:center; background-color:#FFFFFF; background:#FFFFFF; border-color:#FFFFFF;"
+					mold="paging" pageSize="25" width="100%" height="100%">
+					
+				<listhead  style="background:#FFFFFF; background-color:#FFFFFF; border:none; ">
+					<listheader style="color:#000000; background:#FFFFFF;" width="100px"  label="ลำดับ" />
+					<listheader style="color:#000000; background:#FFFFFF;" width="250px"  label="รหัสใช้งาน" />
+					<listheader style="color:#000000; background:#FFFFFF;" width="250px"   label="รายการ" />
+					<listheader style="color:#000000; background:#FFFFFF;"    label="" />
+				
+			
+				</listhead>
+			</listbox>
+			</vlayout>
+	</east>
+	
+	
+  
+</borderlayout>
+
+
+<!-- Info -->
+	
+<window id="HNwindow"  border="normal" height="1000px" width="1400px"  position="center,center"  closable="true" onClose="event.stopPropagation();self.setVisible(false);"
+    				action="show: slideDown;hide: slideUp" visible="false" use="process.report_hn_window" >
+    				
+    				<timer id="Time" delay="1"  repeats="true" onTimer="HNwindow.onDisplayWestNorth();
+    																	HNwindow.onDisplayCenterNorth();
+    																	HNwindow.onDisplayWestCenter();
+    																	HNwindow.onDisplayCenterCenter();
+    																	HNwindow.onDisplayEestCenter();
+    																	HNwindow.onDisplaySouthCenter();"/>
+    																	
+<borderlayout>
+<!-- #5db6ff -->
+<!--Top -->
+
+<north height="310px" border="none" >
+<borderlayout>
+	<west  width="420px" border="none" > 
+	<vlayout>
+		
+		<vlayout height="30px"></vlayout>
+		<vbox style="background: #5db6ff; border-radius: 25px;" height="150px" width="350px">
+		<vlayout height="20px"></vlayout>
+		<hlayout width="20px"></hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="รหัสคนไข้ : "
+			 /> 
+			<textbox id="HnCode_w_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="ชื่อ - สกุล : "
+			 /> 
+			<textbox id="Fname_w_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="วันที่รับบริการ : "
+			 /> 
+			<textbox id="Date_w_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+		
+			
+	</vlayout>	
+	</west>
+	
+	<center border="none">
+		<vlayout>
+		
+		<vbox style="background: #5db6ff; border-radius: 25px; " height="200px" width="350px">
+
+		<hlayout style="margin-top: 10px;">
+			<label style="margin-left: 20px;" value="วันที่ : "
+			 /> 
+			<textbox id="Date_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="เครื่อง : "
+			 /> 
+			<textbox id="FItem_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="รอบ : "
+			 /> 
+			<textbox id="Round_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="เริ่ม : "
+			 /> 
+			<textbox id="sTime_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="เสร็จ : "
+			 /> 
+			<textbox id="eTime_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+		
+		<hlayout>
+
+				<label value="Approve By"	 /> 
+				
+				<hlayout width="160px"></hlayout>
+				
+				<label value="Approve By"	 /> 
+				
+		</hlayout>
+			<hlayout>
+				<textbox id="Approve_c_n" width="100px" height="25px" readonly="true" style="background: #FFFFFF; border-color:#FFFFFF; "/> 
+
+				<hlayout width="140px"></hlayout>
+				<textbox id="Approve_c_n2" width="100px" height="25px" readonly="true" style="background: #FFFFFF; border-color:#FFFFFF; "/> 
+			</hlayout>
+			
+	</vlayout>
+	</center>
+	<east  width="420px" border="none">
+		<hlayout>
+		<button id="btn_report"  label="พิมพ์รายงาน" width="120px" height="35px" style="background: #ffc107; color: #000000; " onClick='
+																	try{
+																	
+																	HNwindow.setAttribute("UsageCode", HNwindow.usagecode); 
+																	HNwindow.setAttribute("HNCode", HNwindow.HnCode); 
+																	report_HN.onPrint();
+																  	}catch(Exception e){
+																  	e.printStackTrace();
+																  	return;
+																  	}'/>
+			<hlayout width="150px"></hlayout>
+				<button id="btnAdd"  label="Close" width="80px" height="35px" style="background: #FF0033; color: #FFFFFF; " onClick='report_HN.closeWindow("HNwindow");HNwindow.timer();'/>
+		</hlayout>
+	</east>
+</borderlayout>
+</north>
+<!-- EndTop -->
+
+<!-- Center -->
+<center border="none" >
+<borderlayout height="280px"  >
+	<west  width="420px" border="none">
+		<vlayout>
+		<vlayout height="40px"></vlayout>
+		<vbox style="background: #5db6ff; border-radius: 25px;" height="150px" width="350px">
+		<vlayout height="20px"></vlayout>
+		<hlayout width="20px"></hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="วันที่ : "
+			 /> 
+			<textbox id="Date_w_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="ชื่อเครื่องมือ : "
+			 /> 
+			<textbox id="FItem_w_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="รหัสใช้งาน : "
+			 /> 
+			<textbox id="Usage_w_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+		
+			
+			
+	</vlayout>	
+	</west>
+	
+	<center border="none">
+		<vlayout style="margin-top: 30px;">
+			<image src="img/trace1.png" width="380px" height="220px"></image>
+			<hlayout>
+
+				<label value="Approve By"	 /> 
+
+				<hlayout width="160px"></hlayout>
+				
+				<label value="Approve By"	 /> 
+				
+			</hlayout>
+
+			<hlayout>
+			<textbox id="Approve_c_c" width="100px" height="25px" readonly="true" style="background: #FFFFFF; border-color:#FFFFFF; "/> 
+				<hlayout width="140px"></hlayout>
+				<textbox id="Approve_c_c2" width="100px" height="25px" readonly="true" style="background: #FFFFFF; border-color:#FFFFFF; "/> 
+			</hlayout>
+			
+		</vlayout>
+	</center>
+
+	<east  width="420px" border="none">
+		<vlayout>
+		<vlayout height="25px"></vlayout>
+		<vbox style="background: #5db6ff; border-radius: 25px;" height="150px" width="350px">
+		<vlayout height="50px"></vlayout>
+		<hlayout width="20px"></hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="เตรียม : "
+			 /> 
+			<textbox id="Ready_e_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		<hlayout> 
+			<label style="margin-left: 20px;" value="ตรวจ : "
+			 /> 
+			<textbox id="Check_e_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+	</vlayout>	
+	 </east>
+</borderlayout>
+</center>	
+<!-- EndCenter -->
+
+<!-- Down -->
+<south height="270px" border="none">
+<borderlayout >
+	<west  width="420px" border="none"></west>
+	<center border="none">
+		<vlayout >
+			
+			<vbox style="background: #5db6ff; border-radius: 25px;" height="220px" width="350px">
+
+		<hlayout style="margin-top: 20px;">
+			<label style="margin-left: 20px; margin-top: 20px;" value="วันที่ : "
+			 /> 
+			<textbox id="Date_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px; margin-top: 20px;" value="เครื่อง : "
+			 /> 
+			<textbox id="FItem_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px; margin-top: 20px;" value="รอบ : "
+			 /> 
+			<textbox id="Round_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout>
+			<label style="margin-left: 20px; margin-top: 20px;" value="เริ่ม : "
+			 /> 
+			<textbox id="sTime_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout>
+			<label style="margin-left: 20px; margin-top: 20px;"  value="เสร็จ : "
+			 /> 
+			<textbox id="eTime_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+	</vlayout>	
+	</center>
+	<east  width="420px" border="none"> </east>
+</borderlayout>
+</south>
+ <!-- EndDown --> 
+  
+</borderlayout>
+</window>
+
+<!-- Info -->
+	<window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" position="center,center"/>
+
+	<!-- In Process-->
+	<window id="WinProcess" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);" position="center,center" >
+		<div align="center">
+			<image src="/images/loading3_3.gif" width="2000px" height="200px" />
+		</div>
+	</window> 
+<window id="Windows" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" style="background:#333333" position="center,center"/>
+</zk>

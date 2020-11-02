@@ -1,0 +1,123 @@
+<?page title="เข้าสู่ระบบ" contentType="text/html;charset=UTF-8"?>
+
+<zk xmlns:w="client">
+	<style>
+
+		body { padding: 0 0; 
+		<!-- background image -->
+		background-image: url('assets/dist/img/background.png');
+		background-position:right; 
+		opacity: 1;
+		background-repeat: no-repeat;
+		height:70%;
+		right: 0;
+    	z-index: -1;
+		background-size: 65%;
+		}
+	</style>
+	
+	<script type="text/javascript" src="/js/jquery.watermarkinput.js" />
+
+	<div id="s" apply="com.poseintelligence.cssd.transaction.CssdLogin" align="left" height="700px" width="555px" style="position:relative;top:150px;left:100px;">
+	
+		<vlayout vflex="1" spacing="25px" >
+		
+			
+			<image src="assets/dist/img/logo.png" width="30%" /> 
+		
+			<label id="Label_Caption" value="เข้าสู่ระบบ" style="color: #224099; font-size:30px; font-family: myFirstFont; margin-top: 60px; font-weight: 700;" />
+			
+			<textbox id="Textbox_UserName" type="text" width="500px" style="text-align:center;color: #333333;font-size:18px;" w:onBind="jq(this).Watermark('ชื่อผู้ใช้งาน','gray')"/>
+			
+			<textbox id="Textbox_Password" type="password" width="500px" style="text-align:center;color: #333333;font-size:18px;" w:onBind="jq(this).Watermark('รหัสผ่าน','gray')"/>
+			
+			<combobox id="cboBID" width="500px" style="text-align:center;color: #333333;font-size:18px;" readonly="true">
+				<comboitem label="กรุณาเลือกตึก "  value="0" style="text-align:center;color: #333333;font-size:18px;" />
+				<comboitem label="ตึกศูนย์การแพทย์" value="1" style="text-align:center;color: #333333;font-size:18px;" />
+				<comboitem label="ตึกเหนือ" value="2" style="text-align:center;color: #333333;font-size:18px;" />
+			</combobox>
+			<hlayout>
+			<hlayout style="margin-left: 395px; "/>
+			<a id="linkchengeuser" label="เปลี่ยนรหัสผ่าน" ></a>
+			
+			</hlayout>
+			<button id="Button_Submit" label="เข้าสู่ระบบ" width="500px" style="color:#ffffff;background: #0275d8;border-radius: 4px;"/>
+			
+			<label id="Label_DB" value="${param['db']}" visible="false" />
+		</vlayout>
+	</div>
+
+   			<div align="right" height="300px" width="275px" style="background:#FFFFFF; position:relative;bottom:250px;left:1800px; border-radius: 25px; background-repeat: no-repeat;">
+   				 <hbox align="right" height="300px" width="275px" style="position:relative;"> 
+				<vlayout vflex="1" spacing="5px" >
+				
+				<hlayout style="margin-top:40px; margin-left: 25px; text-align:center;">
+					<label style="font-size:16px; font-weight: bold; text-align:center;" value="เมื่อพบปัญหาการใช้งาน "> </label>
+    		</hlayout>			
+    			<hlayout style="margin-left: 25px; text-align:center;">
+					<label id="Label_Line" style="font-size:16px; font-weight: bold; text-align:center;" value="สามารถติดต่อได้ที่  "> </label>
+					<label id="LINE" style="color: green; font-size:16px; font-weight: bold;" value="LINE@" visible="true"/>
+					<label id="Label_Line2" style="font-size:16px; font-weight: bold; text-align:center;" value="นี้ค่ะ  "> </label>
+				</hlayout>
+				
+				<hlayout>
+					<image src="qrcode.jpg" width="120px" height="120px" style="margin-left: 80px;"  /> 
+				</hlayout>
+					
+				<hlayout style="margin-left: 25px; text-align:center;">
+					<label style="font-size:16px; font-weight: bold; text-align:center; " value="POSE INTELLIGENCE "> </label>
+				</hlayout>
+					
+				<hlayout style="margin-left: 25px; text-align:center;">
+					<label style="font-size:16px; font-weight: bold; text-align:center; " value="Service Support "> </label>
+				</hlayout>
+				</vlayout>
+				</hbox>	
+				</div>
+				
+
+				
+			<window id="chengeregis" title="เปลี่ยนหัสผ่าน" width="450px" height="500px"  position="center,center" use="process.login" closable="true" onClose="event.stopPropagation();self.setVisible(false);"
+			action="show: slideDown;hide: slideUp" style="background: #FFFFFF; background-repeat: no-repeat;" visible="false">
+			<vlayout>
+				<hlayout>
+				<label style="font-size:16px; font-weight: bold; text-align:center; " value="ชื่อผู้ใช้ : "> </label>
+				</hlayout>
+				
+				<hlayout>
+				<textbox id="user" width="380px"></textbox>
+				</hlayout>
+				
+				<hlayout>
+				<label style="font-size:16px; font-weight: bold; text-align:center; " value="รหัสผ่านผู้ใช้ : "> </label>
+				</hlayout>
+				
+				<hlayout>
+				<textbox id="bfpassword" width="380px"></textbox>
+				</hlayout>
+				
+				<hlayout>
+				<label style="font-size:16px; font-weight: bold; text-align:center; " value="รหัสผ่านใหม่ : "> </label>
+				</hlayout>
+				
+				<hlayout>
+				<textbox id="afpassword" width="380px"></textbox>
+				</hlayout>
+
+				
+				<hlayout>
+				<hlayout width="170px"></hlayout>
+				<button id="Button_cancel" label="ปิด" width="100px" style="color:#ffffff;background: #6c757d;border-radius: 4px;" onClick="chengeregis.onClear()"/>
+				<button id="Button_enter" label="ยืนยัน" width="100px" style="color:#ffffff;background: #0275d8;border-radius: 4px;" onClick="chengeregis.onSave()"/>
+				</hlayout>
+			</vlayout>
+			</window>	
+
+<window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" position="center,center" />
+<window id="WinProcess"   border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);" position="center,center">
+		<div align="center">
+			<image src="/images/loading3_3.gif" width="2000px" height="200px" />
+		</div>
+	</window>
+<window id="Windows" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" style="background:#333333" position="center,center"/>
+</zk>

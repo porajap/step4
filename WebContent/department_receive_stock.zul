@@ -1,0 +1,119 @@
+<?page title="CSSD" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+
+<zk>
+
+	<window id="WindowForm" apply="com.poseintelligence.cssd.transaction.DepartmentReceiveStock" style="background: #2e5fbd;"  border="normal" height="100%" width="100%">
+
+		<caption image="/images/ic_receive_stock_ww.png" style="background: #2e5fbd;color:#FFFFFF;font-size:20px;" label="รับของเข้าสต็อก "/> 
+		
+		<borderlayout id="Main" height="100%" width="100%" >
+	        
+	        <north height="37px" border="none">
+	        	<borderlayout>
+	        		<center border="none">
+		        		<div align="right" height="37px">		
+			           		<hlayout valign="middle" height="37px" >
+			           		
+			           			<combobox id="Combobox_Status" width="150px" text="ใบจ่ายทั้งหมด">
+			           				<comboitem label="ใบจ่ายทั้งหมด"/>
+			           				<comboitem label="รอรับ / รับบางส่วน"/>
+			           				<comboitem label="ปิดเอกสาร"/>
+			           			</combobox>
+				        		
+			           		
+			           			<label value="วันที่" />
+								<datebox id="Datebox_SDocDate" width="125px" format="dd-MM-yyyy" style="" />
+			
+								<label value="-" style="color:#428bca;" />
+								<datebox id="Datebox_EDocDate" width="125px" format="dd-MM-yyyy" style="" />
+			           		
+								<label value="ใบจ่าย"  style="color:#333333;"/>
+								
+								<textbox id="Textbox_Search" style="background: #ffffff;border: 1px solid #666666; color:#666666;" width="165px" />
+								
+								<button id="Button_SearchDoc" label="ค้นหา" image="/images/ic_search.png" width="100px" height="25px" style="color:#333333;background: #f7f7f7;border-radius: 4px;"/>
+							
+							</hlayout>
+						</div>
+	        		</center>
+	        		
+	        		<east border="none" width="45%">
+	        			<div align="right" height="37px">		
+			           		<hlayout valign="middle" height="37px" >	
+			           					           		
+								<textbox id="Textbox_Input"  style="text-align:center;font-weight:bold;" width="200px" placeholder="QR Code"/>
+								
+								<image id="Image_Input" src="/images/qr_dropdown.png" style="position:relative;top:3px;left:-38px" width="30px" height="30px"/>
+							
+								<button id="Button_Receive" label="รับเข้า" image="/images/ic_import.png" width="100px" height="25px" style="color:#ffffff;background: #1eac74;border-radius: 4px;"/>
+							
+							</hlayout>
+						</div>
+	        		</east>
+	        	</borderlayout>
+	        </north>
+	        
+	        <center border="none">
+	        	<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+	        		<listbox id="Listbox_Document" vflex="true" mold="paging" pageSize="17" multiple="false" >
+		        		<listhead>
+		        			<listheader label="No." width="50px" style="background: #2e5fbd;color:#FFFFFF;font-size:14px;"/>
+		        			<listheader label="วันที่" width="90px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:14px;"/>
+		        			<listheader label="เลขที่ใบจ่าย"  width="115px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:14px;"/>
+		        			<listheader label="จำนวนรายการ" width="95px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:12px;"/>
+		        			<listheader label="จำนวนเช็ท" width="80px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:14px;"/>
+		        			<listheader label="สถานะ"    style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+		        			<listheader label="#" width="150px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:14px;"/>
+	        			</listhead>
+	        		</listbox>
+	        	</vlayout>
+	        </center>
+	        
+	        <east width="45%" splittable="true">
+	        	<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+	        		<panel>
+	        			<panelchildren>
+	        				<vlayout>
+		        				<hlayout>
+		        					<vlayout width="80px"><label value="ผู้รับเครื่องมือ" /></vlayout>
+		        					<vlayout><textbox id="Textbox_Recipient" /></vlayout>
+		        					<vlayout width="90px"><label value="ผู้จ่ายเครื่องมือ" /></vlayout>
+		        					<vlayout><textbox id="Textbox_Approve" /></vlayout>
+		        				</hlayout>
+		        				<hlayout>
+		        					<vlayout width="80px"><label value="วันที่จ่าย" /></vlayout>
+		        					<vlayout><textbox id="Textbox_Datepay" /></vlayout>
+		        					<vlayout width="90px"><label value="เวลาจ่าย" /></vlayout>
+		        					<vlayout><textbox id="Textbox_Timepay" /></vlayout>
+		        				</hlayout>
+	        				</vlayout>
+	        			</panelchildren>
+	        		</panel>
+	        		<listbox id="Listbox_Item" vflex="true" mold="paging" pageSize="20" multiple="false">
+		        		<listhead>
+		        			<listheader label="No." width="50px" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>     			
+		        			<listheader label="UsageID" width="140px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+		        			<listheader label="ชื่ออุปกรณ์"  align="left" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+		        			<listheader label="" width="50px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+		        			<listheader label="" width="50px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+	        			</listhead>
+	        		</listbox>
+	        	</vlayout>
+	        </east>
+	        
+	   	</borderlayout>
+   	</window>
+   	
+   	<!-- Info -->
+    <window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+    
+	<!-- In Process-->
+	<window id="WinProcess" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);">
+		<div align="center">
+		  	<image src="/images/loading3_3.gif" width="160px" height="160px" />
+		</div>
+	</window>
+</zk>

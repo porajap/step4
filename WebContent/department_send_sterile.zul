@@ -1,0 +1,161 @@
+<?page title="CSSD" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+
+<zk>
+	<window id="WindowForm" apply="com.poseintelligence.cssd.transaction.DepartmentSendSterile" style="background: #2e5fbd;" title="" border="normal" height="100%" width="100%">
+
+		<caption image="/images/ic_use_equipment_w.png" style="background: #2e5fbd;color:#FFFFFF;font-size:20px;" label="ส่งไป  CSSD"/> 
+				
+		<borderlayout id="Main" height="100%" width="100%" >
+	        <center border="none">
+	        	<borderlayout>
+
+	        		<north border="none" height="208px" splittable="true">
+	        		<div height="37px" align="left" style="position:relative;top:3px;left:18px;top:0px">
+	        			<hlayout style="background: #f4f4f4;">
+	        				<vlayout>
+		        				<hlayout>
+		        					<label value="เลขที่เอกสาร"/>
+		        				</hlayout>
+		        				<hlayout>
+		        					<textbox id="Textbox_Document" />
+		        				</hlayout>
+		        			</vlayout>
+		        			<vlayout>
+		        				<hlayout>
+		        					<label value="วันที่" />
+		        				</hlayout>
+		        				<hlayout>
+		        					<textbox id="Textbox_SSDate" />
+		        				</hlayout>
+		        			</vlayout>
+		        			
+		        		</hlayout>
+	        			<button id="Button_Save" label="ส่ง" image="/images/ic_import.png" width="100px" height="25px" style="color:#ffffff;background: #1eac74;border-radius: 4px;"/>
+	        		</div>
+	        		</north>
+	        	
+	        		<center border="none">
+	        			<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+			        		<listbox id="Listbox_DocumentDetail" vflex="true" mold="paging" pageSize="17" multiple="false" >
+				        		<listhead>
+				        			<listheader label="No." width="50px" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="รหัสใช้งาน" width="200px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="ชื่ออุปกรณ์"  align="left" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="MFG" width="85px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="EXP" width="85px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="R" width="50px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="Del" width="50px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>		        			
+			        			</listhead>
+			        		</listbox>
+			        	</vlayout>
+	        		</center>
+	        		
+	        	</borderlayout>
+	        </center>
+	        
+	        <west width="50%" splittable="true">
+	        	<tabbox>
+	        	<tabs>
+		            <tab label="บันทึกส่ง" />
+		            <tab label="เอกสารส่ง : ร่าง" />
+		        </tabs>
+	        	<tabpanels>
+	        	
+	        		<tabpanel>
+	        		<div align="right" height="37px">
+	        				
+			           		<hlayout valign="middle" height="37px" spacing="10px">
+			           		
+			           			<checkbox id="Checkbox_Mode" label="Text / QR" mold="switch"/>
+			           			
+			           			<space hflex="1" />
+
+								<label id="Label_Search" value="ค้นหาอุปกรณ์" style="color:#333333;position:relative;top:3px;left:18px;top:0px" /> 
+								
+								<textbox id="Textbox_SearchItemStock" style="background: #ffffff;border: 1px solid #666666; color:#666666;position:relative;top:3px;left:38px;top:0px" width="200px" />
+								
+								<image id="Image_Search" src="/images/ic_search_c.png" width="24px" height="24px"/>
+								
+								<button id="Button_SearchItemStock" visible="false" label="ค้นหา" image="/images/ic_search.png" width="95px" height="25px" style="color:#333333;background: #FFFFFF;"/>
+								
+								<button id="Button_Send" label="นำเข้า" image="/images/ic_import.png" width="100px" height="25px" style="color:#ffffff;background: #1eac74;border-radius: 4px;"/>
+							</hlayout>
+						</div>
+						
+	        			<div align="right" height="600px">
+	        			<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+			        		<listbox id="Listbox_ItemStock"  vflex="true" mold="paging" pageSize="20" multiple="true" checkmark="true">
+				        		<listhead>
+				        			<listheader label="" width="35px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>     			
+				        			<listheader label="รหัสใช้งาน" width="170px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="ชื่ออุปกรณ์"  align="left" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="ExpireDate" width="145px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+			        			</listhead>
+			        		</listbox>
+			        	</vlayout>
+			        	</div>
+	        		</tabpanel>
+	        		
+	        		<tabpanel>
+	        			<div align="right" height="60px">		
+			           		<hlayout valign="middle" height="37px" >
+			
+			           			<combobox id="Combobox_Status" width="150px" text="ใบส่งล้างทั้งหมด">
+			           				<comboitem label="ใบส่งล้างทั้งหมด"/>
+			           				<comboitem label="ยังไม่ได้ส่ง"/>
+			           				<comboitem label="ส่งแล้ว"/>
+			           			</combobox>			        
+			           		
+			           			<label value="วันที่" />
+								<datebox id="Datebox_SDocDate" width="125px" format="dd-MM-yyyy" style="" />
+			
+								<label value="-" style="color:#428bca;" />
+								<datebox id="Datebox_EDocDate" width="125px" format="dd-MM-yyyy" style="" />
+			           		
+								<label value="ใบส่งล้าง" style="color:#333333;position:relative;top:0px;left:30px;" />
+								
+								<textbox id="Textbox_Search" style="position:relative;top:0px;left:33px;background: #ffffff;border: 1px solid #666666; color:#666666;" width="165px" />
+								
+								<image id="Image_SearchDoc" style="position:relative;top:0px;" src="/images/ic_search_c.png" width="24px" height="24px"/>
+								
+								<button id="Button_SearchDoc" visible="false" label="ค้นหา" image="/images/ic_search.png" width="100px" height="25px" style="color:#333333;background: #f7f7f7;border-radius: 4px;"/>	
+							
+							</hlayout>
+						</div>
+						<div align="right" height="600px">		
+			           		<hlayout valign="middle" height="37px" >
+			           			<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+			        			<listbox id="Listbox_Document" vflex="true" mold="paging" pageSize="17" multiple="false" >
+				        			<listhead>
+				        				<listheader label="No." width="50px" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        				<listheader label="วันที่" width="90px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        				<listheader label="เลขที่ใบส่งล้าง"  width="115px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:15px;"/>
+				        				<listheader label="จำนวนเช็ท" width="80px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:14px;"/>
+				        				<listheader label="หมายเหตุ"    style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        				<listheader label="#" width="100px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+			        				</listhead>
+			        		</listbox>
+			        	</vlayout>
+			           		</hlayout>
+			           </div>
+	        		</tabpanel>
+	        	</tabpanels>
+	        	</tabbox>
+	        </west>
+	        
+	   	</borderlayout>
+   	</window>
+   	
+   	<!-- Info -->
+    <window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+    
+	<!-- In Process-->
+	<window id="WinProcess" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);">
+		<div align="center">
+		  	<image src="/images/loading3_3.gif" width="160px" height="160px" />
+		</div>
+	</window>
+</zk>

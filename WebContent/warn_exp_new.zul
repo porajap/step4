@@ -1,0 +1,47 @@
+<?page title="เตือนของใกล้หมดอายุ" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+<div class="row" use="process.warn_exe"> 
+ 	<x:div class="col-md-12"> 
+	            <x:div class="card "> 
+              <x:h6 class="card-header bg-primary text-white " style="font-weight:600">
+             		 แจ้งเตือนของใกล้หมดอายุ
+            </x:h6>
+             <x:div class="card-body" style="max-height:1000px;min-height:700px;">
+                <x:div class="row my-1 px-3">
+                 <x:div class="col-md-6">
+                  </x:div>
+                  <x:div class="col-md-6 text-right">
+                 <x:div class='form-group   text-black'>
+                     <x:label class=" form-label  h6">วันที่ :</x:label>
+                      <datebox id="Datebox" width="400px" format="dd-MM-yyyy"  timeZone="UTC+7"  style="background:#D3D3D3;" readonly="true" />
+                   </x:div>
+                  </x:div>
+                </x:div>
+                
+                 <x:div class="row">
+		 	       <x:div class="col-12">
+		 	          <div align="right" height="680px">
+	        			<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+       							   <listbox id="Listboxwarn_exe" vflex="true"  mold="paging" pageSize="20" multiple="true" >
+									<listhead>
+										<listheader label="ลำดับ"></listheader>
+										<listheader label="รหัสใช้งาน"></listheader>
+										<listheader  label="รายการ" ></listheader>
+										<listheader  label="วันหมดอายุ" ></listheader>
+									</listhead>
+								 </listbox>
+								</vlayout>
+			        	</div>
+ 					</x:div>
+				</x:div>	
+                
+                
+                
+                
+             </x:div>
+            </x:div>
+           </x:div>
+ </div>
+
+</zk>
+

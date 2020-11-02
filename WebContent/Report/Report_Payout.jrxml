@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_Receivein" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b10841bf-d218-484c-8323-9b3c7f99c387">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DeptID" class="java.lang.String"/>
+	<parameter name="BID" class="java.lang.String"/>
+	<parameter name="sDate" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\LENOVO\\Desktop\\CSSD\\ReportCSSD\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+payout.DocNo,
+department.DepName,
+employee.FirstName,
+TIME(payout.CreateDate) AS CreateDate,
+buildg.BdName,
+DATE_FORMAT(payout.CreateDate,'%d') AS DATE,
+CASE WHEN MONTH(payout.CreateDate) = 1 THEN "มกราคม"
+     WHEN MONTH(payout.CreateDate) = 2  THEN "กุมภาพันธ์"
+     WHEN MONTH(payout.CreateDate) = 3 THEN "มีนาคม"
+     WHEN MONTH(payout.CreateDate) = 4 THEN "เมษายน"
+		 WHEN MONTH(payout.CreateDate) = 5 THEN "พฤษภาคม"
+		 WHEN MONTH(payout.CreateDate) = 6 THEN "มิถุนายน"
+		 WHEN MONTH(payout.CreateDate) = 7 THEN "กรกฏาคม"
+		 WHEN MONTH(payout.CreateDate) = 8 THEN "สิงหาคม"
+     WHEN MONTH(payout.CreateDate) = 09 THEN "กันยายน"
+     WHEN MONTH(payout.CreateDate) = 10 THEN "ตุลาคม"
+		 WHEN MONTH(payout.CreateDate)=  11 THEN "พฤศจิกายน"
+		 WHEN MONTH(payout.CreateDate) =  12 THEN "ธันวาคม"
+ELSE '' END  AS 'MonthName',
+DATE_FORMAT(DATE_ADD(DATE(payout.CreateDate),INTERVAL  543 YEAR),'%Y') AS DATEYear,
+DATE_FORMAT(DATE(NOW()),'%d') AS DATE1,
+CASE WHEN MONTH (DATE(NOW())) = 01 THEN "มกราคม"
+     WHEN MONTH (DATE(NOW())) = 02  THEN "กุมภาพันธ์"
+     WHEN MONTH (DATE(NOW())) = 03 THEN "มีนาคม"
+     WHEN MONTH (DATE(NOW())) = 04 THEN "เมษายน"
+		 WHEN MONTH (DATE(NOW())) = 05 THEN "พฤษภาคม"
+		 WHEN MONTH (DATE(NOW())) = 06 THEN "มิถุนายน"
+		 WHEN MONTH (DATE(NOW())) = 07 THEN "กรกฏาคม"
+		 WHEN MONTH (DATE(NOW())) = 08 THEN "สิงหาคม"
+     WHEN MONTH (DATE(NOW())) = 09 THEN "กันยายน"
+     WHEN MONTH(DATE(NOW())) = 10 THEN "ตุลาคม"
+		 WHEN MONTH (DATE(NOW())) =  11 THEN "พฤศจิกายน"
+		 WHEN MONTH (DATE(NOW())) =  12 THEN "ธันวาคม"
+ELSE '' END  AS 'MonthName1',
+DATE_FORMAT(DATE_ADD(DATE(DATE(NOW())),INTERVAL  543 YEAR),'%Y') AS DATEYear1
+FROM
+payout
+INNER JOIN employee ON payout.Approve = employee.EmpCode
+INNER JOIN buildg ON buildg.ID = payout.B_ID
+INNER JOIN department ON payout.DeptID = department.ID
+WHERE DATE(payout.CreateDate) = DATE($P{sDate})
+        AND payout.DeptID = $P{DeptID}
+        AND payout.B_ID = $P{BID}
+        AND payout.IsCancel = 0
+        AND payout.IsCheck = 1]]>
+	</queryString>
+	<field name="DocNo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DepName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FirstName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CreateDate" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="BdName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DATE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MonthName" class="java.lang.String"/>
+	<field name="DATEYear" class="java.lang.String"/>
+	<field name="DATE1" class="java.lang.String"/>
+	<field name="MonthName1" class="java.lang.String"/>
+	<field name="DATEYear1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98" splitType="Stretch">
+			<staticText>
+				<reportElement x="401" y="15" width="59" height="20" uuid="df1fa1e2-dd19-4321-947a-3bc2197249c2"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<text><![CDATA[วันที่พิมพ์รายงาน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="69" width="30" height="29" uuid="51900dcf-cd88-47a5-83bd-b457e4a9a16a"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ตึก :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="247" y="68" width="177" height="30" uuid="64374cfa-1a99-42de-b450-2ea642af754f"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BdName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="15" width="39" height="20" uuid="9ccef5c8-61ce-4d43-8af6-95763f08283b"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATE1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="471" y="15" width="66" height="20" uuid="abe3a3b8-1f26-4323-8141-7d53571078cf"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MonthName1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="503" y="15" width="52" height="20" uuid="b9768524-3e8b-4130-b539-4b525cd84051"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="TH SarabunPSK" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["พ.ศ."+ $F{DATEYear1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="106" y="43" width="392" height="33" uuid="191b5b4f-097d-4863-a752-8abc2993a35d"/>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="21" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["สรุปรายงานเบิกของแผนก"+" "+$F{DepName}+" "+"ประจำวันที่"+" "+$F{DATE}+" "+$F{MonthName}+" "+$F{DATEYear}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="540" height="21" uuid="57b88470-2b9f-4e20-8be4-2608c5bad67d"/>
+				<subreportParameter name="BID">
+					<subreportParameterExpression><![CDATA[$P{BID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DeptID">
+					<subreportParameterExpression><![CDATA[$P{DeptID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DocNo">
+					<subreportParameterExpression><![CDATA[$F{DocNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sDate">
+					<subreportParameterExpression><![CDATA[$P{sDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Report_Payout_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15">
+			<textField>
+				<reportElement x="478" y="0" width="33" height="15" uuid="a5dcfd2f-2045-400f-b433-d2460886770f"/>
+				<textElement textAlignment="Right">
+					<font fontName="TH SarabunPSK" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["หน้า"+$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="511" y="0" width="23" height="15" uuid="b9e21427-85cb-4e85-bdd2-0b9f8dfe8008"/>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

@@ -1,0 +1,22 @@
+<?page title="เข้าสู่ระบบ" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<style>
+        .sysWin .z-window-embedded-cnt ,
+        .sysWin .z-window-overlapped-cnt,
+        .sysWin .z-window-popup-cnt {padding: 0px;}
+
+        .bigbutton {
+            border-radius: 8px;
+        }
+        .bigbutton > i {
+            font-size: 150px;
+            opacity: 0.6;
+        }
+        .iceblue_c .bigbutton > i {
+            opacity: 0.9;
+        }
+    </style>
+	<window id="main" apply="process.main"  height="100%" width="100%" >
+	<hbox id="Hbox_main" spacing="12px"/>
+	</window>
+</zk>

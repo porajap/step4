@@ -1,0 +1,145 @@
+<?page title="CSSD" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+
+
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+	<div id="head" use="com.poseintelligence.cssd.transaction.DepartmentReceiveStock2">
+		<x:div class="row" >
+			 <x:div class="col-md-6">
+			  <x:div class="card">
+				<x:div class="card-header bg-primary text-white" style="font-weight:600">ตารางแสดงเอกสารรับเข้า</x:div>
+				
+						 	  <x:div class="card-body" style="max-height:770px;min-height:770px;">
+						 	  
+								   <x:div class="row">
+			                        <x:div class="col-md-6">
+			                          <x:div class='form-group   text-black'>
+			                            <x:label class=" form-label  h6">วันที่เอกสาร :</x:label>
+                            			<datebox id="Datebox_SDocDate" width="300px" format="dd-MM-yyyy"  timeZone="UTC+7" />
+			                          </x:div>
+			                        </x:div>
+			                        <x:div class="col-md-6">
+			                          <x:div class='form-group   text-black'>
+			                            <x:label class=" form-label  h6">ถึง :</x:label>
+                            			<datebox id="Datebox_EDocDate" width="300px" format="dd-MM-yyyy"  timeZone="UTC+7" />
+                            			<textbox   sclass="form-control" readonly="true" id="Textbox_chk_recive" value="0" visible="false"/>            		
+			                          </x:div>
+			                        </x:div>
+			                      </x:div>
+			                      
+			                 	<x:div class="row my-1 px-3">
+	                              <x:div class="  col-md-6 ">
+	                             </x:div>
+	                             <x:div class="  col-md-6 text-right">
+	                                <button  class="btn btn-primary "  id="Button_Cancel" style="width:35%;" onClick="head.onDisplayDocument()">ค้นหา</button>
+	                                <button  class="btn btn-info " id="Button_SendSterile"  style="width:35%;">ดูรายงาน</button>
+	                             </x:div>
+                            	</x:div>
+                            	
+                            	
+		                       <x:div class="row mt-3">
+				 	            <x:div class="col-12">
+				 	           	  <div align="right" height="600px">
+			        			    <vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+		       							   <listbox id="Listbox_Document" vflex="true"  mold="paging" pageSize="10" multiple="true" >
+											<listhead>
+												<listheader label="วันที่เอกสาร"  width="150px"></listheader>
+												<listheader label="เลขที่เอกสาร" width="150px" ></listheader>
+												<listheader label="สถานะ"  ></listheader>
+												<listheader label="จำนวน" width="100px" align="center" ></listheader>
+												<listheader  align="center" ></listheader>
+											</listhead>
+										 </listbox>
+										</vlayout>
+					        	      </div>
+		 						     </x:div>	                      
+							        </x:div>
+                            	
+							</x:div>
+			  </x:div>
+			</x:div>
+			<x:div class="col-md-6">
+			  <x:div class="card">
+				<x:div class="card-header bg-info text-white" style="font-weight:600">รายละเอียดเอกสาร</x:div>
+				
+				
+								<x:div class="card-body" style="max-height:770px;min-height:770px;">
+						 	  	
+						 	  	<x:div class="row">
+			                        <x:div class="col-md-12">
+			                          <x:div class='form-group   text-black'>
+			                            <x:label class=" form-label  h6">ใบส่งของ :</x:label>
+                            			<textbox   sclass="form-control" readonly="true"/>
+			                          </x:div>
+			                        </x:div>
+			                      </x:div>	
+						 	  
+						 	  
+								   <x:div class="row">
+			                        <x:div class="col-md-6">
+			                          <x:div class='form-group   text-black'>
+			                            <x:label class=" form-label  h6">ผู้รับเครื่องมือ :</x:label>
+                            			<textbox   sclass="form-control" readonly="true" id="Textbox_Recipient"/>
+			                          </x:div>
+			                        </x:div>
+			                        <x:div class="col-md-6">
+			                          <x:div class='form-group   text-black'>
+			                            <x:label class=" form-label  h6">ผู้จ่ายเครื่องมือ :</x:label>
+                            			<textbox   sclass="form-control" readonly="true" id="Textbox_Approve"/>
+			                          </x:div>
+			                        </x:div>
+			                      </x:div>
+			                      
+			                      <x:div class="row">
+			                        <x:div class="col-md-6">
+			                          <x:div class='form-group   text-black'>
+			                            <x:label class=" form-label  h6">วันที่จ่าย :</x:label>
+                            			<textbox   sclass="form-control" readonly="true" id="Textbox_date_pay"/>
+			                          </x:div>
+			                        </x:div>
+			                        <x:div class="col-md-6">
+			                          <x:div class='form-group   text-black'>
+			                            <x:label class=" form-label  h6">เวลาที่จ่าย :</x:label>
+                            			<textbox   sclass="form-control" readonly="true" id="Textbox_time_pay"/>
+			                          </x:div>
+			                        </x:div>
+			                      </x:div>
+			                      
+		                       <x:div class="row mt-3">
+				 	            <x:div class="col-12">
+				 	           	  <div align="right" height="480px">
+			        			    <vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+		       							   <listbox id="Listbox_Detail" vflex="true"  mold="paging" pageSize="10" multiple="true" >
+											<listhead>
+												<listheader label="เลขที่เอกสาร"  width="120px"></listheader>
+												<listheader label="รหัสใช้งาน"  width="150px"></listheader>
+												<listheader label="ชื่ออุปกรณ์" width="150px" ></listheader>
+												<listheader label="จำนวน" width="70px" align="center"></listheader>
+												<listheader label="ความเสี่ยง	" width="100px" align="center"></listheader>
+												<listheader width="70px" align="center" ></listheader>
+											</listhead>
+										 </listbox>
+										</vlayout>
+					        	      </div>
+		 						     </x:div>	                      
+							        </x:div>
+                            	
+							</x:div>
+				
+				
+				
+				
+				
+				
+				
+			  </x:div>
+			</x:div>
+		</x:div>
+	</div>
+	
+	
+	
+	   	    <window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+	
+</zk>

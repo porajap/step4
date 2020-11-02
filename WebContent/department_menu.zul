@@ -1,0 +1,187 @@
+<?page title="CSSD" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+<?link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"?>
+<?link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous"?>
+<?script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">?>
+<?script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" ?>
+<?script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"?>
+	
+	<style>
+		.h-inline-block { display: inline-block; _display: inline; }
+	</style>
+
+	<timer id="Time" delay="60000" running="true" repeats="true" />
+
+	<borderlayout id="Main" apply="com.poseintelligence.cssd.transaction.DepartmentMenu" height="100%" width="100%">
+	
+		<north border="none" height="60px">
+			<hbox width="100%" align="center" style="background: #FFFFFF;">
+			
+				<image src="/images/ic_pose_logo_4.png" height="57px" width="300px"/>
+				
+				<space hflex="1"/>
+				
+				<toolbar sclass="nav_toolbar" hflex="1" style="background: #FFFFFF;border: 0px white solid;" align="end">
+					<toolbarbutton id="Toolbarbutton_Project"
+						image="/images/ic_building.png"
+						style="font-size:14px;color:#333333;" 
+						tooltiptext="โปรเจ็ค"/>
+					<toolbarbutton id="Toolbarbutton_Branch"
+						image="/images/ic_home_x24g.png"
+						style="font-size:14px;color:#333333;" 
+						tooltiptext="แผนก"/>
+					<toolbarbutton id="Toolbarbutton_User"
+						image="/images/ic_user_x24g.png"
+						style="font-size:14px;color:#333333;"
+						tooltiptext="ผู้ใช้งาน" />
+					<toolbarbutton id="Toolbarbutton_Refresh"
+						image="/images/ic_refresh_x24g.png" label="รีเฟรซ"
+						tooltiptext="รีเฟรซ" style="font-size:14px;color:#333333;" />
+					<toolbarbutton id="Toolbarbutton_Logout"
+						image="/images/ic_logout_x24g.png" label="ออกจากระบบ"
+						tooltiptext="ออกจากระบบ" style="font-size:14px;color:#333333;" />
+				</toolbar>
+			</hbox>
+		</north>
+		
+		<center border="none">
+			<borderlayout>
+				<west id="MenuList" title="เมนูโปรแกรม" size="350px" minsize="200" maxsize="400" flex="true" splittable="true" collapsible="true" border="normal" autoscroll="true" open="true" >
+					<vlayout spacing="1px" vflex="true">
+						<tree id="TreeMenu" hflex="1" vflex="true">
+							<treechildren>
+							<treeitem id="Treeitem_0">
+									<treerow>	
+										<treecell 
+										image="/images/ic_home.png"
+										label="หน้าเมนูหลัก" />
+										
+									</treerow>
+								</treeitem>
+
+								<treeitem id="Treeitem_1">
+									<treerow>
+										<treecell
+										image="/images/ic_receive_stock.png"
+											label="รับเข้าสต็อก" />
+									
+									</treerow>
+								</treeitem>
+
+
+								
+								<treeitem id="Treeitem_22">
+									<treerow>
+										<treecell
+										image="/images/ic_sendsterile.png"
+											label="ส่งไป CSSD" />
+										
+									</treerow>
+								</treeitem>
+
+								<treeitem id="Treeitem_3">
+									<treerow>
+										<treecell
+										image="/images/ic_requistion.png"
+											label="เบิกเครื่องมือ / เครื่องผ้า" />
+										
+									</treerow>
+								</treeitem>
+
+								<treeitem id="Treeitem_4">
+									<treerow>
+										<treecell
+										image="/images/ic_requistion.png"
+										
+											label="ติดตามเครื่องมือ" />
+										
+									</treerow>
+								</treeitem>
+
+								<treeitem id="Treeitem_5">
+									<treerow>
+										<treecell
+										image="/images/ic_use_equipment.png"
+											label="สต๊อกแผนก" />
+											
+									</treerow>
+								</treeitem>
+								
+								<treeitem id="Treeitem_6">
+									<treerow>
+										<treecell
+										image="/images/ic_stock.png"
+											label="ยืม - คืนเครื่องมือระหว่างแผนก" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_7">
+									<treerow>
+										<treecell
+										image="/images/ic_stock.png"
+											label="สืบค้นข้อมูลจาก HN" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_8">
+									<treerow>
+										<treecell
+										image="/images/ic_stock.png"
+											label="ผลตรวจสอบการปราษจากเชื้อ" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_9">
+									<treerow>
+										<treecell
+										image="/images/ic_stock.png"
+											label="เพิ่มรายการเครื่องมือ" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_10">
+									<treerow>
+										<treecell
+										image="/images/ic_stock.png"
+											label="คู่มือการใช้งาน" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_11">
+									<treerow>
+										<treecell
+										image="/images/ic_settings.png"
+											label="ตั้งค่าระบบ" />
+											
+									</treerow>
+								</treeitem>
+						
+							</treechildren>
+						</tree>
+					</vlayout>
+				</west>
+
+				<center border="none" style="background: #f1f6fd;" autoscroll="false">
+					<include id="Include_Src" mode="auto" height="100%" width="100%" />
+				</center>
+				
+			</borderlayout>
+
+		</center>
+	</borderlayout>
+
+	<!-- Info -->
+	<window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);"  position="center,center"/>
+
+	<!-- In Process-->
+	<window id="WinProcess" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);"  position="center,center">
+		<div align="center">
+			<image src="/images/loading3_3.gif" width="165px" height="165px" style="align: center" />
+		</div>
+	</window>
+</zk>

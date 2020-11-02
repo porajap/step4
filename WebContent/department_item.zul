@@ -1,0 +1,126 @@
+<?page title="CSSD" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+
+<zk>
+
+<style src="css/style.css"/>
+
+	<window id="WindowForm" use="com.poseintelligence.cssd.transaction.DepartmentItem" style="background: #2e5fbd;" title="" border="normal" height="100%" width="100%">
+
+		<caption image="/images/ic_use_equipment_w.png" style="background: #2e5fbd;color:#FFFFFF;font-size:20px;" label="เพิ่มรายการอุปกรณ์"/> 
+				
+		<borderlayout id="Main" height="100%" width="100%" >
+			<west width="40%" splittable="true"> 
+				<div class="card">
+					<div class="card-header bg-primary" style="font-weight:600">
+						เพิ่มรายการ
+					</div>
+				<div class="card-body" style="min-height:650px;max-height:650px;">
+							<vlayout>
+
+			<hlayout>
+				<radiogroup id = "Radio_ItemMode">
+					<radio selected="true" value="1" label="Extra" />
+					<radio value="2" label="ชุดเครื่องมือ" />
+				</radiogroup>
+			</hlayout>
+
+			<hlayout>
+				<label value="ชื่อเครื่องมือ :" />
+			</hlayout>
+
+			<hlayout>
+				<textbox id="Textbox_Item" width="500px" />
+			</hlayout>
+			
+			<hlayout>
+				<label value="หน่วยนับ :" />
+			</hlayout>
+
+			<hlayout>
+				<combobox id="Combobox_Unit" width="500px" text="หน่วยนับ">
+				</combobox>
+			</hlayout>
+			
+			<hlayout>
+				<checkbox id="notclean" label="ไม่ผ่านการล้าง" /> 
+			</hlayout>
+
+			<hlayout>
+				<label value="ลักษณะการใช้งาน :" />
+					<radiogroup>
+						<radio id="Radio11" label="ใช้ซ้ำ" checked="true"/>
+						<radio id="Radio22" label="ใช้แล้วทิ้ง"  />
+					</radiogroup>
+			</hlayout>
+			
+			<hlayout>
+				<label value="รูปภาพ :" />
+			</hlayout>
+			
+			<hlayout>
+				<button label="Upload Image" upload="true,maxsize=500" class="dropify-fr"  width="500px" />
+			</hlayout>
+			
+		</vlayout>
+				</div>
+				</div>
+			</west>
+	        <east width="59%">
+	        	<div class="card">
+	        		<div class="card-header bg-info" style="font-weight:600">
+	        			เพิ่มรายการในเซ็ต
+	        		</div>
+	        		<div class="card-body" style="min-height:650px;max-height:650px;">
+	        					<vlayout spacing="1px" vflex="true">		
+			<hlayout>
+				<label value="รายการในเซ็ต 0 รายการ รวมทั้งหมด 0 ชิ้น" />
+			</hlayout>
+
+			<hlayout>
+				<hlayout width="700px">
+				</hlayout>
+				<button id="Button_Import" label="นำเข้า" width="70px" height="35px"/>
+			</hlayout>
+		
+			<listbox id="Listboxitem" mold="paging" pageSize="25" >
+				<listhead>
+					<listheader style="background: #17a2b8;color:#FFFFFF;font-size:16px;" width="250px" label="ลำดับ" />
+					<listheader style="background: #17a2b8;color:#FFFFFF;font-size:16px;" width="250px" label="รหัสรายการ" />
+					<listheader style="background: #17a2b8;color:#FFFFFF;font-size:16px;" width="250px" label="รายการ" />
+					<listheader style="background: #17a2b8;color:#FFFFFF;font-size:16px;" label="จำนวน" />
+				</listhead>
+			</listbox>
+
+			<hlayout>
+				<label value="จำนวนชิ้น / เซ็ต : " />
+			</hlayout>
+
+			<hlayout>
+				<textbox id="TextboxQty" width="300px" />
+			</hlayout>
+			
+			<hlayout>
+				<hlayout width="600px">
+				</hlayout>
+				<button id="btnSearch" label="บันทึกเครื่องมือ"  width="200px" height="35px"/>
+			</hlayout>	
+		</vlayout>
+	        		</div>
+	        	</div>
+	        </east>
+	   	</borderlayout>
+   	</window>
+   	
+   	<!-- Info -->
+    <window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+    
+	<!-- In Process-->
+	<window id="WinProcess" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);">
+		<div align="center">
+		  	<image src="/images/loading3_3.gif" width="160px" height="160px" />
+		</div>
+	</window>
+</zk>

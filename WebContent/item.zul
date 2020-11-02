@@ -1,0 +1,99 @@
+<?page title="เพิ่มรายการเครื่องมือ" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="item" height="100%" width="100%" border="normal">
+<borderlayout height="100%" width="100%" >
+	<center border="none" title="เพิ่มรายการ"
+	 >
+		<vlayout>
+			<hlayout>
+				<radiogroup>
+								<radio id="Radio1" label="Extra" checked="true"/>
+								<radio id="Radio2" label="ชุดเครื่องมือ"
+								  />
+				</radiogroup>
+			</hlayout>
+			<hlayout><label value="ชื่อเครื่องมือ :"></label></hlayout>
+			<hlayout><textbox id="Textboxitem" width="500px" /></hlayout>
+			
+			<hlayout><label value="หน่วยนับ :"></label></hlayout>
+			<hlayout><combobox id="cboitem" width="500px"><comboitem label=""/></combobox></hlayout>
+			
+			<hlayout><checkbox id="notclean" label="ไม่ผ่านการล้าง" /> </hlayout>
+			<hlayout><label value="ลักษณะการใช้งาน :"></label>
+					<radiogroup>
+								<radio id="Radio11" label="ใช้ซ้ำ" checked="true"/>
+								<radio id="Radio22" label="ใช้แล้วทิ้ง"  />
+					</radiogroup>
+			</hlayout>
+			
+			<hlayout>
+				<label value="รูปภาพ :"></label>
+			</hlayout>
+			<hlayout>
+				<button label="Upload Image" upload="true,maxsize=500"  width="500px" />
+			</hlayout>
+			
+			
+		</vlayout>
+	</center>
+
+	<east border="none" width="48%" title="เพิ่มรายการในเซ็ต"
+	 >
+		
+		<vlayout spacing="1px" vflex="true">		
+		<hlayout>
+		<label value="รายการในเซ็ต 0 รายการ รวมทั้งหมด 0 ชิ้น"> 
+		</label>
+		</hlayout>
+		<hlayout>
+		<hlayout width="600px"></hlayout>
+		<button id="btnimport" label="นำเข้า" width="70px" height="35px"/>
+		</hlayout>
+		
+			<listbox id="Listboxitem" style="align:center; background-color:#FFFFFF; background:#FFFFFF; border-color:#FFFFFF;"
+					mold="paging" pageSize="25" >
+					
+				<listhead  style="background:#FFFFFF; border-color:#FFFFFF; background-color:#FFFFFF;">
+				
+					<listheader style="color:#000000; background:#FFFFFF;"   width="250px" label="ลำดับ"
+					
+					 />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="250px" label="รหัสรายการ"
+					
+					 />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="250px" label="รายการ"
+					
+					/>
+					<listheader style="color:#000000; background:#FFFFFF;"    label="จำนวน"
+					
+					 />
+			
+				</listhead>
+			</listbox>
+				<hlayout>
+					<label value="จำนวนชิ้น / เซ็ต : ">
+					</label>
+				</hlayout>
+				<hlayout>
+					<textbox id="TextboxQty" width="300px" />
+					</hlayout>
+				
+				<hlayout>
+					<hlayout width="600px"></hlayout>
+					<button id="btnSearch" label="บันทึกเครื่องมือ"  width="200px" height="35px"/>
+				</hlayout>	
+			</vlayout>
+				
+	</east>
+</borderlayout>
+</window>
+<!-- Info -->
+	<window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+
+	<!-- In Process-->
+	<window id="WinProcess" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);">
+		<div align="center">
+			<image src="/images/loading3_3.gif" width="2000px" height="200px" />
+		</div>
+</window>
+</zk>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report_Traceability_subreport" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="35ca424e-bf94-4cdb-ba1f-c1f70b4348b7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="70"/>
+	<parameter name="UsageCode" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+          DATE_FORMAT(NOW(),'%d-%m-%Y') AS ddate,
+          item.itemname,
+          itemstock.UsageCode,
+          DATE_FORMAT(wash.DocDate,'%d-%m-%Y') AS washdate,
+          washmachine.MachineName2 AS WashMachineName,
+          wash.WashRoundNumber AS WashRoundNumber,
+          TIME(wash.StartTime) AS timeSdatew,
+          TIME(wash.FinishTime) AS timeEdatew,
+          CONCAT(emp1.FirstName,' ',emp1.LastName) AS washBeforeApprovename,
+          CONCAT(emp2.FirstName,' ',emp2.LastName) AS washAfterApprovename,
+          DATE_FORMAT(sterile.DocDate,'%d-%m-%Y') AS steriledate,
+          sterilemachine.MachineName AS SterileMachineName,
+          sterile.SterileRoundNumber AS SterileRoundNumber,
+          TIME(sterile.StartTime) AS timeSdates,
+          TIME(sterile.FinishTime) AS timeEdates,
+          CONCAT(emp3.FirstName,' ',emp3.LastName) AS ppsname,
+          CONCAT(emp4.FirstName,' ',emp4.LastName) AS appsname,
+          CONCAT(emp5.FirstName,' ',emp5.LastName) AS sterilesname,
+          CONCAT(emp6.FirstName,' ',emp6.LastName) AS sterileBeforeApprovename,
+          CONCAT(emp7.FirstName,' ',emp7.LastName) AS sterileAfterApprovename
+          FROM
+          itemstock
+          LEFT JOIN item ON itemstock.ItemCode = item.itemcode
+          LEFT JOIN washdetail ON itemstock.RowID = washdetail.ItemStockID
+          LEFT JOIN wash ON washdetail.WashDocNo = wash.DocNo
+          LEFT JOIN washmachine ON wash.WashMachineID = washmachine.ID
+          LEFT JOIN employee AS emp1 ON wash.BeforeApprove = emp1.EmpCode
+          LEFT JOIN employee AS emp2 ON wash.AfterApprove = emp2.EmpCode
+          LEFT JOIN steriledetail ON itemstock.RowID = steriledetail.ItemStockID
+          LEFT JOIN sterile ON steriledetail.DocNo = sterile.DocNo
+          LEFT JOIN sterilemachine ON sterile.SterileMachineID = sterilemachine.ID
+          LEFT JOIN employee AS emp3 ON sterile.PrepareCode = emp3.ID
+          LEFT JOIN employee AS emp4 ON sterile.ApproveCode = emp4.ID
+          LEFT JOIN employee AS emp5 ON sterile.SterileCode = emp5.ID
+          LEFT JOIN employee AS emp6 ON sterile.BeforeApprove = emp6.EmpCode
+          LEFT JOIN employee AS emp7 ON sterile.AfterApprove = emp7.EmpCode
+ WHERE itemstock.UsageCode = $P{UsageCode}
+ ORDER BY wash.DocDate DESC,sterile.DocDate DESC
+ LIMIT 1]]>
+	</queryString>
+	<field name="ddate" class="java.lang.String"/>
+	<field name="itemname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="UsageCode" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="washdate" class="java.lang.String"/>
+	<field name="WashMachineName" class="java.lang.String"/>
+	<field name="WashRoundNumber" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="timeSdatew" class="java.sql.Time"/>
+	<field name="timeEdatew" class="java.sql.Time"/>
+	<field name="washBeforeApprovename" class="java.lang.String"/>
+	<field name="washAfterApprovename" class="java.lang.String"/>
+	<field name="steriledate" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SterileMachineName" class="java.lang.String"/>
+	<field name="SterileRoundNumber" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="timeSdates" class="java.sql.Time"/>
+	<field name="timeEdates" class="java.sql.Time"/>
+	<field name="ppsname" class="java.lang.String"/>
+	<field name="appsname" class="java.lang.String"/>
+	<field name="sterilesname" class="java.lang.String"/>
+	<field name="sterileBeforeApprovename" class="java.lang.String"/>
+	<field name="sterileAfterApprovename" class="java.lang.String"/>
+	<detail>
+		<band height="431" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="11" width="49" height="20" uuid="3743fc20-2b2f-498c-9ce5-a153f25dfed0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ชื่ออุปกรณ์ :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="63" y="11" width="171" height="20" uuid="3d00d021-49ee-4fb3-8082-df3e34934daf"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itemname}+"-"+$F{UsageCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="45" width="48" height="20" uuid="a28df4dd-2a26-4e1d-8c5a-22f9a89aae70"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[การฆ่าเชื้อ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="78" width="48" height="20" uuid="588290c7-5f30-4791-a2fb-9272e67e53ec"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[วันที่ฆ่าเชื้อ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="113" width="30" height="20" uuid="85e92ca6-4b4b-43b0-8ce5-14b8fac0f413"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[เครื่อง :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="145" width="40" height="20" uuid="27c3d42e-1504-4971-9418-1ad4f2f00b9c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[เวลาเริ่ม :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="177" width="40" height="20" uuid="19d0ebd7-0101-4edc-99cb-d669a5d84d34"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ผู้เตรียม :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="208" width="82" height="20" uuid="7c5ef7fc-76fe-473a-baa4-d92427aa3155"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ยืนยันก่อนเริ่มเครื่อง :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="113" width="27" height="20" uuid="c7ed3c6e-eabc-4302-b623-49e119e3c0f0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[รอบ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="145" width="48" height="20" uuid="5ccac935-f6db-4ca8-9cbb-4f9896af6e9d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[เวลาเสร็จ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="177" width="40" height="20" uuid="5a14a035-4cbd-479d-b1e8-7587157cbae1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ผู้ตรวจ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="208" width="84" height="20" uuid="3078dba4-d1ba-4a3b-871d-8d3d32c58767"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ยืนยันหลังจบเครื่อง :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="15" y="245" width="478" height="1" uuid="7d58e93b-bff4-4328-b759-fbcd0a4092f2"/>
+			</line>
+			<staticText>
+				<reportElement x="15" y="398" width="82" height="20" uuid="4c971e35-f314-4c26-be31-bebf15807cec"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Approve ก่อนล้าง :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="366" width="40" height="20" uuid="29172fa8-67c5-49a2-a21e-5b92ec12c298"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[เวลาเริ่ม :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="299" width="48" height="20" uuid="2e3c46dc-2e4f-474a-99a0-5c9d156ea569"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[วันที่ล้าง :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="334" width="30" height="20" uuid="d11e8ea3-0627-4919-8b19-da862613747b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[เครื่อง :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="366" width="47" height="20" uuid="69825d71-bb8a-4539-a696-2a8104c3768e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[เวลาเสร็จ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="266" width="48" height="20" uuid="60bf417b-4d2e-4baf-a41e-5c21c98d236e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[การล้าง :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="334" width="27" height="20" uuid="b3e12f37-e899-4274-b21f-fd2bf3b56d71"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[รอบ :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="398" width="82" height="20" uuid="7e28fd8a-626e-403d-b40d-999c584057bc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Approve หลังล้าง :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="62" y="78" width="100" height="20" uuid="f8bcd1df-173b-437d-898b-6fe4cd6aec9c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{steriledate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="44" y="113" width="179" height="20" uuid="63e4af23-1907-4f05-8972-89e540c64f51"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SterileMachineName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="145" width="100" height="20" uuid="19f115d7-9702-4e8a-b581-1b50730836eb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{timeSdates}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="177" width="100" height="20" uuid="c02fef2d-989c-4bda-82ea-47d378a0a9fd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ppsname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="208" width="100" height="20" uuid="61813e67-073f-46b6-88ef-9fd87ba05dd6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sterileBeforeApprovename}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="113" width="31" height="20" uuid="6ec737bb-ac4c-4ebc-adab-a4f783ed9b08"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SterileRoundNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="145" width="100" height="20" uuid="0951c0c1-d914-460e-abd9-4414503e09d0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{timeEdatew}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="177" width="103" height="20" uuid="ed5f7e3d-426d-4af6-aacd-f374651f961a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{appsname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="208" width="100" height="20" uuid="97fe7152-680c-4c8b-908c-3144a25b2e17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sterileAfterApprovename}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="299" width="79" height="20" uuid="2cd4b3ba-2c30-43a8-b0a1-3b7588e297f2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{washdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="334" width="189" height="20" uuid="6ff55033-82b0-4ae4-b987-e9362d7f1662"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{WashMachineName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="55" y="366" width="100" height="20" uuid="8a9cb299-6318-44be-a93a-c6ecd443fe9a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{timeSdates}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="366" width="100" height="20" uuid="a658e80f-f175-4f82-8d31-1d0e2677cbad"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{timeEdatew}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="334" width="100" height="20" uuid="333976e9-adae-4ce7-bc62-02d71193cdcc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{WashRoundNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="398" width="100" height="20" uuid="3757c679-d9b2-485b-a85b-61f6ae80e0c3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sterileBeforeApprovename}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="398" width="100" height="20" uuid="0b63154a-fcd7-40ef-b985-29f96d81d478"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="TH SarabunPSK" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sterileAfterApprovename}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

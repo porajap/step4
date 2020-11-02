@@ -1,0 +1,149 @@
+<?page title="เมนูหลัก" contentType="text/html;charset=UTF-8"?>
+
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+<style>.h-inline-block { display: inline-block; _display: inline; }</style>
+	<timer id="Time" delay="60000" running="true" repeats="true" />
+<borderlayout id="Main" apply="process.menu" height="100%" width="100%">
+	<north title="Poseintelligence"  border="none" height="60px" >
+	
+				 <toolbar sclass="nav_toolbar" >
+	            	
+	            	<toolbarbutton id="Toolbarbutton_Logout"  label="ออกจากระบบ" tooltiptext="ออกจากระบบ" style="font-size:14px;color:#333333;" />
+	        	</toolbar>
+				
+
+		</north>
+<center border="none">
+<borderlayout>
+	<west title="Menu" border="none" size="350px" minsize="200" 
+	maxsize="400" flex="true" splittable="true" collapsible="true" autoscroll="true" open="true">
+			<vlayout spacing="1px" vflex="true">
+				<tree id="TreeMenu" hflex="1" vflex="true">
+							<treechildren>
+
+								<treeitem id="Treeitem_0">
+									<treerow>	
+										<treecell 
+										iconSclass="z-icon-home"
+										label="หน้าเมนูหลัก" />
+										
+									</treerow>
+								</treeitem>
+
+								<treeitem id="Treeitem_1">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-list"
+											label="รับเข้าสต็อก" />
+									
+									</treerow>
+								</treeitem>
+
+								<treeitem id="Treeitem_2">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-file"
+											label="ส่งไป CSSD" />
+										
+									</treerow>
+								</treeitem>
+
+								<treeitem id="Treeitem_3">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-list-alt"
+											label="เบิกเครื่องมือ / เครื่องผ้า" />
+										
+									</treerow>
+								</treeitem>
+
+								<treeitem id="Treeitem_4">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-tags"
+											label="ติดตามเครื่องมือ" />
+										
+									</treerow>
+								</treeitem>
+
+								<treeitem id="Treeitem_5">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-folder-open"
+											label="สต๊อก OR" />
+											
+									</treerow>
+								</treeitem>
+								
+								<treeitem id="Treeitem_6">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-folder-minus"
+											label="ยืม - คืนเครื่องมือระหว่างแผนก" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_7">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-th-list"
+											label="สืบค้นข้อมูลจาก HN" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_8">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-file-pdf"
+											label="ผลตรวจสอบการปราษจากเชื้อ" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_9">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-satellite-dish"
+											label="เพิ่มรายการเครื่องมือ" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_10">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-file-alt"
+											label="คู่มือการใช้งาน" />
+											
+									</treerow>
+								</treeitem>
+								<treeitem id="Treeitem_11">
+									<treerow>
+										<treecell
+										iconSclass="z-icon-cog"
+											label="ตั้งค่าระบบ" />
+											
+									</treerow>
+								</treeitem>
+
+							</treechildren>
+						</tree>
+		</vlayout>
+		</west>
+		<center border="none" style="background: #f1f6fd;" autoscroll="false">
+					<include id="Include_Src" mode="auto" height="100%" width="100%" />
+				</center>
+</borderlayout>	
+</center>			
+</borderlayout>
+<!-- Info -->
+	<window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+
+	<!-- In Process-->
+	<window id="WinProcess" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);">
+		<div align="center">
+			<image src="/images/loading3_3.gif" width="165px" height="165px" />
+		</div>
+	</window>
+</zk>

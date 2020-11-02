@@ -1,0 +1,228 @@
+<?page title="HN คนไข้" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="report_HN_window" title="รายละเอียด" border="normal" height="1000px" width="1400px"   position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+<borderlayout >
+<!-- #5db6ff -->
+<!--Top -->
+
+<north height="295px" border="none" >
+<borderlayout>
+	<west  width="420px" border="none" > 
+	<vlayout>
+		<vlayout height="30px"></vlayout>
+		<vbox style="background: #5db6ff; border-radius: 25px;" height="150px" width="350px">
+		<vlayout height="20px"></vlayout>
+		<hlayout width="20px"></hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="รหัสคนไข้ : "
+			 /> 
+			<textbox id="Hn_w_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="ชื่อ - สกุล : "
+			 /> 
+			<textbox id="Fname_w_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="วันที่รับบริการ : "
+			 /> 
+			<textbox id="Date_w_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+		
+			<hlayout>
+				<hlayout width="250px"></hlayout>
+				<label value="Approve By"	 /> 
+			</hlayout>
+				
+			<hlayout>
+				<hlayout width="240px"></hlayout>
+				<textbox id="Approve_w_n" width="100px" height="25px" readonly="true" style="background: #FFFFFF; border-color:#000000; "/> 
+			</hlayout>
+	</vlayout>	
+	</west>
+	
+	<center border="none">
+		<vlayout>
+		
+		<vbox style="background: #5db6ff; border-radius: 25px;" height="190px" width="350px">
+
+		<hlayout>
+			<label style="margin-left: 20px;" value="วันที่ : "
+			 /> 
+			<textbox id="Date_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="เครื่อง : "
+			 /> 
+			<textbox id="FItem_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="รอบ : "
+			 /> 
+			<textbox id="Round_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="เริ่ม : "
+			 /> 
+			<textbox id="sTime_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="เสร็จ : "
+			 /> 
+			<textbox id="eTime_c_n" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+		
+		<hlayout>
+				<hlayout width="250px"></hlayout>
+				<label value="Approve By"	 /> 
+			</hlayout>
+				
+			<hlayout>
+				<hlayout width="240px"></hlayout>
+				<textbox id="Approve_c_n" width="100px" height="25px" readonly="true" style="background: #FFFFFF; border-color:#000000; "/> 
+			</hlayout>
+			
+	</vlayout>
+	</center>
+	<east  width="420px" border="none"></east>
+</borderlayout>
+</north>
+<!-- EndTop -->
+
+<!-- Center -->
+<center border="none">
+<borderlayout height="300px">
+	<west  width="420px" border="none">
+		<vlayout>
+		<vlayout height="40px"></vlayout>
+		<vbox style="background: #5db6ff; border-radius: 25px;" height="150px" width="350px">
+		<vlayout height="20px"></vlayout>
+		<hlayout width="20px"></hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="วันที่ : "
+			 /> 
+			<textbox id="Date_w_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="ชื่อเครื่องมือ : "
+			 /> 
+			<textbox id="FItem_w_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="รหัสใช้งาน : "
+			 /> 
+			<textbox id="Usage_w_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+		
+			<hlayout>
+				<hlayout width="250px"></hlayout>
+				<label value="Approve By"	 /> 
+			</hlayout>
+				
+			<hlayout>
+				<hlayout width="240px"></hlayout>
+				<textbox id="Approve_c_w" width="100px" height="25px" readonly="true" style="background: #FFFFFF; border-color:#000000; "/> 
+			</hlayout>
+			
+	</vlayout>	
+	</west>
+	
+	<center border="none">
+		<vlayout>
+			<image src="img/trace1.png" width="360px" height="200px"></image>
+			
+			<hlayout>
+				<hlayout width="250px"></hlayout>
+				<label value="Approve By"	 /> 
+			</hlayout>
+				
+			<hlayout>
+				<hlayout width="240px"></hlayout>
+				<textbox id="Approve_c_c" width="100px" height="25px" readonly="true" style="background: #FFFFFF; border-color:#000000; "/> 
+			</hlayout>
+		</vlayout>
+	</center>
+
+	<east  width="420px" border="none">
+		<vlayout>
+		<vlayout height="25px"></vlayout>
+		<vbox style="background: #5db6ff; border-radius: 25px;" height="150px" width="350px">
+		<vlayout height="50px"></vlayout>
+		<hlayout width="20px"></hlayout>
+		<hlayout>
+			<label style="margin-left: 20px;" value="เตรียม : "
+			 /> 
+			<textbox id="Ready_e_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		<hlayout> 
+			<label style="margin-left: 20px;" value="ตรวจ : "
+			 /> 
+			<textbox id="Check_e_c" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+	</vlayout>	
+	 </east>
+</borderlayout>
+</center>	
+<!-- EndCenter -->
+
+<!-- Down -->
+<south height="295px" border="none">
+<borderlayout >
+	<west  width="420px" border="none"></west>
+	<center border="none">
+		<vlayout >
+			
+			<vbox style="background: #5db6ff; border-radius: 25px;" height="200px" width="350px">
+
+		<hlayout>
+			<label style="margin-left: 20px;" value="วันที่ : "
+			 /> 
+			<textbox id="Date_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="เครื่อง : "
+			 /> 
+			<textbox id="FItem_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout> 
+			<label style="margin-left: 20px;" value="รอบ : "
+			 /> 
+			<textbox id="Round_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout>
+			<label style="margin-left: 20px;" value="เริ่ม : "
+			 /> 
+			<textbox id="sTime_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		
+		<hlayout>
+			<label style="margin-left: 20px;" value="เสร็จ : "
+			 /> 
+			<textbox id="eTime_c_s" width="200px" readonly="true" style="background: #5db6ff; border-color:#5db6ff; "/> 
+		</hlayout>
+		</vbox>
+	</vlayout>	
+	</center>
+	<east  width="420px" border="none"> </east>
+</borderlayout>
+</south>
+ <!-- EndDown --> 
+  
+</borderlayout>
+</window>
+
+</zk>

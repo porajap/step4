@@ -1,0 +1,139 @@
+<?page title="CSSD" contentType="text/html;charset=UTF-8"?>
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+
+<zk>
+
+	
+	<window id="WindowForm" apply="com.poseintelligence.cssd.transaction.DepartmentRequestPayout" style="background: #2e5fbd;" title="" border="normal" height="100%" width="100%">
+
+		<caption image="/images/ic_requistion_w.png" style="background: #2e5fbd;color:#FFFFFF;font-size:20px;" label="ขอเบิกอุปกรณ์จากจ่ายกลาง (Requisition)"/> 
+
+		<borderlayout id="Main" height="100%" width="100%" >
+	        
+	        <north height="37px" border="none">
+	        	<borderlayout>
+	        		<center border="none">
+		        		<div align="right" height="37px">		
+			           		<hlayout valign="middle" height="37px" >
+			           		
+			           			<combobox id="Combobox_Status" width="150px" text="ใบขอเบิกทั้งหมด">
+			           				<comboitem label="ใบขอเบิกทั้งหมด"/>
+			           				<comboitem label="ใบขอเบิกที่ยังไม่ได้ส่ง"/>
+			           				<comboitem label="ใบขอเบิกที่ส่งแล้ว"/>
+			           			</combobox>
+				        
+			           		
+			           			<label value="วันที่" />
+								<datebox id="Datebox_SDocDate" width="125px" format="dd-MM-yyyy" style="" />
+			
+								<label value="-" style="color:#428bca;" />
+								<datebox id="Datebox_EDocDate" width="125px" format="dd-MM-yyyy" style="" />
+								
+								<label value="ใบขอเบิก" style="color:#333333;position:relative;top:0px;left:30px;" />
+								
+								<textbox id="Textbox_Search" style="position:relative;top:0px;left:33px;background: #ffffff;border: 1px solid #666666; color:#666666;" width="165px" />
+								
+								<image id="Image_SearchDoc" style="position:relative;top:0px;" src="/images/ic_search_c.png" width="24px" height="24px"/>
+								
+								<button id="Button_SearchDoc" visible="false" label="ค้นหา" image="/images/ic_search.png" width="100px" height="25px" style="color:#333333;background: #f7f7f7;border-radius: 4px;"/>	
+
+							</hlayout>
+						</div>
+	        		</center>
+	        		
+	        		<west border="none" width="50%">
+	        			<div align="right" height="37px">		
+			           		<hlayout valign="middle" height="37px" spacing="10px">
+			           		
+								<label value="Text" />	
+								<checkbox id="Checkbox_Mode" mold="switch"/>
+			           			<label value="QR" />  
+			           			
+			           			
+			           			<label value="เครื่องมือ" />
+			           			<checkbox id="Checkbox_Catagory" mold="switch"/>
+			           			<label value="เครื่องผ้า" />
+			           			
+			           			<space hflex="1" />
+
+								<label id="Label_Search" value="ค้นหาอุปกรณ์"  style="color:#333333;position:relative;top:3px;left:38px;top:0px"/> 
+								
+								<textbox id="Textbox_SearchItemStock" style="background: #ffffff;border: 1px solid #666666; color:#666666;position:relative;top:3px;left:38px;top:0px" width="200px" />
+								
+								<image id="Image_Search" src="/images/ic_search_c.png" width="24px" height="24px"/>
+								
+								<button id="Button_SearchItemStock" visible="false" label="ค้นหา" image="/images/ic_search.png" width="95px" height="25px" style="color:#333333;background: #FFFFFF;"/>
+								
+								<button id="Button_Send" label="ขอเบิก" image="/images/ic_import.png" width="100px" height="25px" style="color:#ffffff;background: #1eac74;border-radius: 4px;"/>
+							</hlayout>
+							
+						</div>
+	        		</west>
+	        	</borderlayout>
+	        </north>
+	        
+	        <center border="none">
+	        
+	        	<borderlayout>
+	        		<north border="none" height="208px" splittable="true">
+			        	<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+			        		<listbox id="Listbox_Document" vflex="true" mold="paging" pageSize="17" multiple="false" >
+				        		<listhead>
+				        			<listheader label="No." width="50px" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="วันที่" width="90px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="เลขที่ใบขอเบิก"  width="115px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:15px;"/>
+				        			<listheader label="จำนวน" width="80px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:14px;"/>
+				        			<listheader label="หมายเหตุ"    style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="" width="75px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="" width="75px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+			        			</listhead>
+			        		</listbox>
+			        	</vlayout>
+	        		</north>
+	        	
+	        		<center border="none">
+	        			<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+			        		<listbox id="Listbox_DocumentDetail" vflex="true" mold="paging" pageSize="17" multiple="false" >
+				        		<listhead>
+				        			<listheader label="No." width="50px" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="รหัสอุปกรณ์" width="130px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="ชื่ออุปกรณ์"  align="left" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="จำนวน" width="85px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+		        					<listheader label="หน่วยนับ" width="85px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+				        			<listheader label="#" width="100px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+			        			</listhead>
+			        		</listbox>
+			        	</vlayout>
+	        		</center>
+	        	</borderlayout>
+	        </center>
+	        
+	        <west width="50%" splittable="true">
+	        	<vlayout spacing="1px" vflex="true" style="background: #f4f4f4;">
+	        		<listbox id="Listbox_Item" vflex="true" mold="paging" pageSize="20" multiple="true" checkmark="true">
+		        		<listhead>
+		        			<listheader label="" width="35px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>     			
+		        			<listheader label="รหัสอุปกรณ์" width="130px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+		        			<listheader label="ชื่ออุปกรณ์"  align="left" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+		        			<listheader label="จำนวน" width="85px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+		        			<listheader label="หน่วยนับ" width="85px" align="center" style="background: #2e5fbd;color:#FFFFFF;font-size:16px;"/>
+	        			</listhead>
+	        		</listbox>
+	        	</vlayout>
+	        </west>
+	        
+	   	</borderlayout>
+   	</window>
+   	
+   	<!-- Info -->
+    <window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+    
+	<!-- In Process-->
+	<window id="Window_Process" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);">
+		<div align="center">
+		  	<image src="/images/loading3_3.gif" width="160px" height="160px" />
+		</div>
+	</window>
+</zk>

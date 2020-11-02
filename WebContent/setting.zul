@@ -1,0 +1,85 @@
+<?page title="ตั้งค่าระบบ" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<window id="setting"  height="100%" width="100%" border="normal" style="background: #2e5fbd;" >
+<caption image="/images/ic_use_equipment_w.png" style="background: #2e5fbd; color:#FFFFFF;font-size:20px;" label="ตั้งค่าระบบ"/> 
+	<grid>
+	        <columns>
+	            <column/>
+	            <column width="160px" align="center"/>
+	        </columns>
+	        <auxhead>
+	            <auxheader colspan="2" label="1. ตั้งค่าเมนูรับของเข้าสต๊อก" style="background: #2e5fbd;color:#FFFFFF;"/>
+	        </auxhead>
+	        <rows>
+	        	<row>
+		            <hlayout>
+		            	<space width="35px"/>
+		                <label value="สแกนรับอุปกรณ์เข้าสต็อกแผนก (เปิด / ปิด)" />
+	                </hlayout>
+	                <checkbox id="Checkbox_RC_IsUsedReceiveManual" mold="switch" />
+	            </row> 
+	        </rows>
+	    </grid>
+	    
+	    <grid>
+	        <columns>
+	            <column/>
+	            <column width="160px" align="center"/>
+	        </columns>
+	        <auxhead>
+	            <auxheader colspan="2" label="2. ตั้งค่าทั่วไป" style="background: #2e5fbd;color:#FFFFFF;"/>
+	        </auxhead>
+	        <rows>
+	        	<row>
+	                <hlayout>
+		            	<space width="35px"/>
+		                <label value="กำหนดการแจ้งเตือนของอุปกรณ์ใกล้หมดอายุ " />
+		                <intbox id="Intbox_GN_WarningExpiringSoonDay" width="50px" style="text-align:center;font-weight:bold;" constraint="no negative"/>
+		                <label value="วัน " />
+	                </hlayout>
+	                <checkbox id="Checkbox_DP_IsUsedDispatch" mold="switch"/>
+	            </row> 
+	        </rows>
+	    </grid>
+	    
+	    <grid>
+	        <columns>
+	            <column/>
+	            <column width="160px" align="center"/>
+	        </columns>
+	        <auxhead>
+	            <auxheader colspan="2" label="3. ตั้งค่าส่งล้างแบบมี HN" style="background: #2e5fbd;color:#FFFFFF;"/>
+	        </auxhead>
+	        <rows>
+	            <row>
+	                <div>
+		            	<space width="35px"/>
+		                <label value="ส่งล้างแบบมี HN" />
+		                
+	                </div>
+	                <checkbox id="Checkbox_GN_IsUsedWarningExpiringSoon" mold="switch"/>
+	            </row> 
+	        </rows>
+	    </grid>
+	    
+	    <grid>
+	        <columns>
+	            <column/>
+	            <column width="160px" align="center"/>
+	        </columns>
+	        <auxhead>
+	            <auxheader colspan="2" label="4. ตั้งค่าแผนกล้างเอง" style="background: #2e5fbd;color:#FFFFFF;"/>
+	        </auxhead>
+	        <rows>
+	            <row>
+	                <hlayout>
+		            	<space width="35px"/>
+		                <label value="เปิดเมนูแผนกล้างเอง" />
+	                </hlayout>
+	                <checkbox id="Checkbox_SS_IsConfirmSendSterile" mold="switch"/>
+	            </row> 
+	        </rows>
+	    </grid>
+</window>
+</zk>

@@ -1,0 +1,44 @@
+<?page title="เตือนของใกล้หมดอายุ" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:x="xhtml" xmlns:zk="zk">
+
+
+<window id="wbe"  width="100%" height="100%" style="background: #2e5fbd;"  use="process.warn_before_exe">
+
+<caption image="/images/ic_use_equipment_w.png" width="50%" height="100%" style="background: #2e5fbd; color:#FFFFFF;font-size:20px; align:center;" label="อุปกรณ์หมดอายุ"/> 
+<borderlayout height="100%" width="50%" style="align:center;">
+	<center border="none" >
+		<vlayout>
+			<hlayout>
+			<label value="วันที่ : " />
+			</hlayout>
+			
+			<hlayout width="185px">
+			<datebox id="Datebox" width="185px" format="dd-MM-yyyy" style="background:#D3D3D3;" readonly="true"/>
+			</hlayout>
+			
+			<listbox id="Listboxwarn_before_exe" style="align:center; background:#FFFFFF; border: 0px;"
+					mold="paging" pageSize="17">
+					
+				<listhead  style="background:#FFFFFF;  ">
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="ลำดับ" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="255px" label="รหัสใช้งาน" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="255px" label="รายการ" />
+					<listheader style="color:#000000; background:#FFFFFF;"    label="วันหมดอายุ" />
+				</listhead>
+			</listbox>
+		</vlayout>
+	</center>
+</borderlayout>
+
+</window>
+
+<!-- Info -->
+	<window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+
+	<!-- In Process-->
+	<window id="WinProcess" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);">
+		<div align="center">
+			<image src="/images/loading3_3.gif" width="2000px" height="200px" />
+		</div>
+	</window>
+</zk>

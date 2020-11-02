@@ -1,0 +1,329 @@
+<?page title="เบิกใช้อุปกรณ์" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+
+	<tabbox id="payout_section" width="100%"  height="100%" style="border:none" use="process.payout_section" sclass="nav_tabs">
+	
+        <tabs id="tabs">
+            <tab label="ยืม"/>
+            <tab label="คืน"/>
+           
+        </tabs>
+
+  <tabpanels>
+  
+  <!-- Tab1 -->
+            <tabpanel>
+            <borderlayout>
+            <west  width="950px"  >
+            <caption  style="background: #007bff; border: normal; color:#FFFFFF;font-size:20px; border-radius: 5px;"  height="50px" width="100%" label="เบิกของจากจ่ายกลาง"/> 
+                <toolbar hflex="true"> 
+               
+		
+			
+			<hlayout>
+					<label value="ค้นหารายการ : "   ></label>	
+			</hlayout>
+			<hlayout>
+					<textbox id="TextboxSearchpayout" width="400px" readonly="false"/>	
+					<hlayout width="200px"></hlayout>
+						<button id="btnSearch" label="ค้นหา" width="110px" height="35px" onClick="payout_section.SearchData()"/>
+						<button id="btnAdd" label="เพิ่มรายการ" width="110px" height="35px" onClick='if(Listboxpayout_sectionTab1.getSelectedCount() > 0){payout_section.onImport(Listboxpayout_sectionTab1);
+																						 Listboxpayout_sectionTab1.clearSelection();}'/>
+			</hlayout>
+
+			
+			
+			<listbox id="Listboxpayout_sectionTab1" style="border:none; background:#FFFFFF; border-color:#FFFFFF; align:center; "
+					 height="800px" checkmark="true" multiple="true" >
+					
+				<listhead>
+					<listheader style="color:#000000; border:none; background:#FFFFFF; border-color:#FFFFFF;"   width="100px" label="ลำดับ" />
+					<listheader style="color:#000000; border:none; background:#FFFFFF; border-color:#FFFFFF;"   width="200px" label="UsageCode" />
+					<listheader style="color:#000000; border:none; background:#FFFFFF; border-color:#FFFFFF;"   width="150px" label="รายการ" />
+					<listheader style="color:#000000; border:none; background:#FFFFFF; border-color:#FFFFFF;"   width="100px" label="หน่วยนับ" />
+					<listheader style="color:#000000; border:none; background:#FFFFFF; border-color:#FFFFFF;"  label="วันหมดอายุ" />
+				</listhead>
+			</listbox>
+			
+		</toolbar>
+		</west>
+		
+		<east border="none" width="950px">
+			<borderlayout >
+			<north height="400px" border="none" >
+			<caption  style="background: #17a2b8; color:#FFFFFF;font-size:20px; border-radius: 5px;"  height="50px" width="100%" label="ข้อมูลเอกสาร"/> 
+				<vlayout spacing="1px" vflex="true" >	
+				<hlayout>
+					<label value="แผนก : "   ></label>
+					<hlayout width="350px"></hlayout>
+					<label value="ค้นหาเลขที่เอกสาร : "   ></label>
+				</hlayout>	
+				
+			<hlayout>
+			<combobox id="ComboboxpayoutTab1" width="400px" readonly="true"   >
+				<comboitem label="กรุณาเลือกแผนกปลายทาง" value="0" />
+			</combobox>
+			<textbox id="TextboxSearchpayoutTab1" width="400px" readonly="false"/>
+			</hlayout>
+			
+			<hlayout>
+					<label value="วันที่ : "   ></label>
+					<hlayout width="280px"></hlayout>
+
+				</hlayout>	
+				
+			<hlayout>
+			<datebox id="Datebox1" width="400px" format="dd-MM-yyyy" style="background:#D3D3D3;" readonly="true"/>
+		
+			<hlayout width="190px"></hlayout>
+					<button id="btnSearch1" label="ค้นหา" width="100px" height="35px" onClick="payout_section.onSearch()"/>
+					<button id="btnCreate1" label="สร้าง"	style="background: #28a745; color: #FFFFFF;" width="100px" height="35px" onClick="payout_section.onSave()"/>
+			</hlayout>
+
+			<listbox id="Listboxpayout_sectionTab1_2" style="align:center; background-color:#FFFFFF; background:#FFFFFF; border-color:#FFFFFF;"
+					mold="paging" pageSize="3" width="100%" height="100%">
+					
+				<listhead  style="background:#FFFFFF; background-color:#FFFFFF; border:none; ">
+					<listheader style="color:#000000; background:#FFFFFF;"  width="50px"  label="" 
+					/>
+					<listheader style="color:#000000; background:#FFFFFF;" width="70px"  label="ลำดับ
+					" />
+					<listheader style="color:#000000; background:#FFFFFF;"  width="150px"  label="เลขที่เอกสาร
+					" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="วันที่เอกสาร
+					" />
+					<listheader style="color:#000000; background:#FFFFFF;"  width="100px"  label="จำนวน
+					" />
+					<listheader style="color:#000000; background:#FFFFFF;"  width="100px" label="แผนก
+					" />
+					<listheader style="color:#000000; background:#FFFFFF;"  width="150px" label="สถานะ
+					" />
+					<listheader style="color:#000000; background:#FFFFFF;"    label="" />
+
+			
+				</listhead>
+			</listbox>
+			</vlayout>
+			</north>
+			<south height="380px" border="none">
+			<caption  style="background: #28a745; color:#FFFFFF;font-size:20px; border-radius: 5px;"  height="50px" width="100%" label="รายละเอียด"/> 
+				<vlayout spacing="1px" vflex="true" >	
+					<hlayout>
+					<label value="เลขที่เอกสาร : "   ></label>
+				</hlayout>	
+				
+			<hlayout>
+			<textbox id="TextboxSearchpayoutSouthTab1" width="400px" readonly="true"/>
+			<hlayout width="100px"></hlayout>
+			<button id="btnDelete" label="ลบรายการ" width="150px" height="35px" onClick='if(Listboxpayout_sectionSouthTab1_2.getSelectedCount() > 0){payout_section.onDelete2(Listboxpayout_sectionSouthTab1_2);
+																						 Listboxpayout_sectionSouthTab1_2.clearSelection();}
+																						 else{ Messagebox.show("เกิดข้อผิดพลาด");
+																						 }'/>
+			<button id="btnLend" label="ยืม" style="background: #dc3545; color: #FFFFFF;" width="150px" height="35px" onClick="payout_section.onUpdate();"/>
+			</hlayout>
+			
+			<listbox id="Listboxpayout_sectionSouthTab1_2" style="align:center; background-color:#FFFFFF; background:#FFFFFF; border-color:#FFFFFF;"
+				 mold="paging" pageSize="3" width="100%" height="100%">
+					
+				<listhead  style="background:#FFFFFF; background-color:#FFFFFF; border:none; ">
+				
+					<listheader style="color:#000000; background:#FFFFFF;" width="100px"  label="ลำดับ
+					" />
+					<listheader style="color:#000000; background:#FFFFFF;"  width="200px"  label="UsageCode" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="200px" label="รายการ"
+					 />
+					<listheader style="color:#000000; background:#FFFFFF;"  width="100px"  label="หน่วย"
+					 />
+					<listheader style="color:#000000; background:#FFFFFF;"    label="จำนวน"
+					 />
+
+				</listhead>
+			</listbox>
+				</vlayout>
+			</south>
+			</borderlayout>
+			
+			
+		</east>
+		
+		
+		
+		
+		</borderlayout>
+		</tabpanel>
+<!-- End Tab1 -->
+
+<!-- Tab2 -->
+            <tabpanel>
+            <borderlayout>
+             <west border="none" width="900px">
+             <caption  style="background: #007bff; color:#FFFFFF;font-size:20px; border-radius: 5px;"  height="50px" width="100%" label="ตารางแสดงเอกสารรับเข้า"/> 
+                <toolbar hflex="true"> 
+                
+		<vlayout>
+				<hlayout>
+					<label value="วันที่เอกสาร : "   ></label>
+					<hlayout width="210px"></hlayout>
+					<label value="ถึง : "   ></label>
+				</hlayout>
+			<hlayout>
+			<datebox id="DateboxTab2" width="300px" format="dd-MM-yyyy" style="background:#D3D3D3;" readonly="true"/>
+			
+			<datebox id="DateboxTab22" width="300px" format="dd-MM-yyyy" style="background:#D3D3D3;" readonly="true"/>
+			</hlayout>
+			
+
+			<hlayout>
+						<hlayout width="400px"></hlayout>
+						<button id="btnSearchTab2" label="ค้นหา" style="background: #007bff; color: #FFFFFF;" width="100px" height="35px" onClick="payout_section.onDisplayTab2()"/>
+						<button id="btnSearchTab22" label="ดูรายงาน" width="100px" height="35px" onClick='payout_section.openWindow("open_report")'/>
+			</hlayout>
+			
+			<vlayout>
+			
+			<listbox id="Listboxpayout_sectionTab2" style="align:center; background-color:#FFFFFF; background:#FFFFFF; border-color:#FFFFFF;"
+					mold="paging" pageSize="13" height="100%" >
+					
+				<listhead style="background:#FFFFFF; background-color:#FFFFFF; border-color:#FFFFFF; ">
+					<listheader style="color:#000000; background:#FFFFFF;"   width="100px" label="ลำดับ" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="วันที่เอกสาร	" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="เลขที่เอกสาร" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="สถานะ" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="จำนวน" />
+					<listheader style="color:#000000; background:#FFFFFF;"  label="แผนกปลายทาง" />
+				</listhead>
+			</listbox>
+			</vlayout>
+		</vlayout>
+		</toolbar>
+		</west>
+		
+		<east border="none" width="950px">
+		<caption  style="background: #17a2b8; color:#FFFFFF;font-size:20px; border-radius: 5px;"  height="50px" width="100%" label="รายละเอียดเอกสาร"/> 
+			<borderlayout >
+			<north height="1000px" border="none" >
+				<vlayout spacing="1px" vflex="true" >	
+				<hlayout>
+					<label value="วันที่ : "   ></label>
+					<hlayout width="310px"></hlayout>
+					<label value="เลขที่เอกสาร : "   ></label>
+				</hlayout>	
+				
+			<hlayout>
+			<textbox id="TextboxSearchpayoutDateTab2" width="350px" readonly="true"/>
+			<textbox id="TextboxSearchpayoutTab2" width="350px" readonly="true"/>
+			</hlayout>
+			
+			<hlayout>
+					<label value="สถานะ : "   ></label>
+					<hlayout width="295px"></hlayout>
+					<label value="แผนกปลายทาง : "  ></label>
+				</hlayout>	
+				
+			<hlayout>
+				<textbox id="TextboxSearchpayoutStatusTab2_1" width="350px" readonly="true"/>
+				<textbox id="TextboxSearchpayoutDepTab2_2" width="350px" readonly="true"/>
+			</hlayout>
+			<hlayout>
+			<hlayout width="200px"></hlayout>
+					<button id="btnSearchTab2_2" label="คืน"  style="background: #28a745; color: #FFFFFF;" width="250px" height="35px" onClick='if(Listboxpayout_sectionTab2_2.getSelectedCount() > 0){payout_section.onUpdate2(Listboxpayout_sectionTab2_2);
+																					
+																						 Listboxpayout_sectionTab2_2.clearSelection();
+																						 Messagebox.show("คืนของสำเร็จ");}'/>
+			</hlayout>
+
+			<listbox id="Listboxpayout_sectionTab2_2" style="align:center; background-color:#FFFFFF; background:#FFFFFF; border-color:#FFFFFF;"
+					mold="paging" pageSize="8" width="100%" height="100%" checkmark="false" multiple="false">
+					
+				<listhead  style="background:#FFFFFF; background-color:#FFFFFF; border:none; ">
+					<listheader style="color:#000000; background:#FFFFFF;"  width="50px"  label="" />
+					<listheader  style="color:#000000; background:#FFFFFF;" width="150px"  label="ลำดับ" />
+					<listheader style="color:#000000; background:#FFFFFF;"  width="150px"  label="UsageCode" />
+					<listheader style="color:#000000; background:#FFFFFF;"   width="150px" label="รายการ" />
+					<listheader style="color:#000000; background:#FFFFFF;"  width="150px"  label="หน่วยนับ" />
+					<listheader style="color:#000000; background:#FFFFFF;"    label="จำนวน" />
+
+			
+				</listhead>
+			</listbox>
+			</vlayout>
+			</north>
+			</borderlayout>
+		</east>
+		
+		</borderlayout>
+		</tabpanel>
+	<!-- End Tab2 -->
+	
+		</tabpanels>
+
+		</tabbox>
+
+<window id="open_report"  title="รายงานรับของเข้าสต็อก"  width="450px" height="500px"  closable="true"  use="process.payout_section_report"  onClose="event.stopPropagation();self.setVisible(false);"
+			action="show: slideDown;hide: slideUp" style="background: #FFFFFF; background-repeat: no-repeat;" visible="false">
+			
+				<hlayout>
+				<label style="font-size:16px; font-weight: bold; text-align:center; " value="รายงาน  "> </label>
+				</hlayout>
+				
+				<hlayout>
+				<combobox id="combobox_report" width="380px">
+					<comboitem label="รายงานยืมของ"  value="0"></comboitem>
+					<comboitem label="รายงานคือของ"  value="1"></comboitem>
+				</combobox>
+				</hlayout>
+				
+				<hlayout>
+				<label style="font-size:16px; font-weight: bold; text-align:center; " value="วันที่เอกสาร  "> </label>
+				</hlayout>
+				
+				<hlayout>
+				<datebox id="sdate_report" width="188px" format="dd-MM-yyyy"></datebox>
+				<datebox id="edate_report" width="188px" format="dd-MM-yyyy"></datebox>
+				</hlayout>
+			
+			<vlayout height="20px"></vlayout>
+				<hlayout>
+				<hlayout width="270px"></hlayout>
+				<button id="view_report" label="ดูข้อมูล" width="100px" style="color:#000000;background: #ffc107; border-radius: 4px;" onClick='
+				
+				try{
+																	open_report.setAttribute("sdate",general.DateTime.convertDate( sdate_report.getText())); 
+																	open_report.setAttribute("edate", general.DateTime.convertDate( edate_report.getText())); 
+																	open_report.setAttribute("BID", open_report.B_ID); 
+																	
+																	payout_section.onPrint();
+																	
+																 
+																  	
+																  }catch(Exception e){return;}
+				
+				
+				
+				
+				'/>
+				</hlayout>
+
+				<vlayout height="200px"></vlayout>
+				<hlayout>
+				
+				<hlayout width="305px"></hlayout>
+				<button id="Button_cancel" label="ปิด" width="70px" style="color:#000000;background: #FFFFFF;border-radius: 4px; border-color: #6c757d;"  onClick='payout_section.closeWindow("open_report");'/>
+				</hlayout>
+			
+			</window>	
+
+
+<!-- Info -->
+	<window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+
+	<!-- In Process-->
+	<window id="WinProcess" position="center,center" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);">
+		<div align="center">
+			<image src="/images/loading3_3.gif" width="2000px" height="200px" />
+		</div>
+	</window>
+
+ 	<window id="Windows" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" style="background:#333333" />
+</zk>

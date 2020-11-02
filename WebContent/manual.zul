@@ -1,0 +1,8 @@
+<?page title="คู่มือการใช้งาน" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="manual" height="100%" width="100%" border="normal" use="process.pdf" style="background: #2e5fbd;">
+<caption image="/images/ic_use_equipment_w.png" style="background: #2e5fbd; color:#FFFFFF;font-size:20px;" label="คู่มือการใช้งาน"/> 
+					<pdfviewer id="pv1" hflex="1" vflex="1" src="/assets/pdf/Manual.pdf"/>
+	 
+</window>
+</zk>

@@ -1,0 +1,13 @@
+<?page title="เข้าสู่ระบบ" contentType="text/html;charset=UTF-8"?>
+
+<?link rel="shortcut icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/images/pose_favicon.ico"?>
+<zk>
+	<zscript>
+	<![CDATA[
+	Executions.sendRedirect("Login2.jsp");
+	]]>
+</zscript>
+
+	
+</zk>

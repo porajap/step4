@@ -1,0 +1,74 @@
+<?page title="รายงาน" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="report" height="100%" width="100%" border="normal" style="background: #2e5fbd;" use="process.report">
+<caption image="/images/ic_use_equipment_w.png" style="background: #2e5fbd;color:#FFFFFF;font-size:20px;" label="Report"/> 
+		
+<borderlayout height="100%" width="100%" >
+	<center border="none"  title="รายชื่อรายงาน" >
+		<vlayout>
+			<hlayout>
+				<label value="ค้นหาชื่อรายงาน" />
+			</hlayout>
+			<hlayout>
+			<textbox id="TextboxSearchReport" width="350px" />
+				<button id="btnSearchReport" label="ค้นหา" width="70px" height="35px"/>
+			</hlayout>
+
+	<hlayout>
+		<button id="btnClick" label="ผลตรวจสอบประสิทธิภาพทำให้ปราศจากเชื้อ (SporeTest)" width="800px" height="35px" onClick=""/>
+	</hlayout>
+		</vlayout>
+	</center>
+
+	<east border="none" width="48%"  title="รายละเอียด" >
+		<vlayout>
+			<hlayout>
+				<label value="ชื่อรายงาน" ></label>  	
+				<hlayout width="110px"/>
+				<textbox id="textboxreport" width="350px" readonly="true"></textbox>
+			</hlayout> 
+			
+			<hlayout> 
+				<label value="วันที่ (เริ่มต้น)" ></label>
+				<hlayout width="93px"/>
+				<datebox id="textboxreportsdate" format="dd-MM-yyyy" width="350px"></datebox>
+			</hlayout>
+			
+			<hlayout> 
+				<label value="วันที่ (สิ้นสุด)" ></label> 	 
+				<hlayout width="95px"/>	
+				<datebox id="textboxreportedate" format="dd-MM-yyyy" width="350px"></datebox>
+			</hlayout>
+			
+			<hlayout> 
+				<label value="ประเภท" ></label> 	
+				<hlayout width="128px"/>
+					<combobox id="cboReport" width="350px">
+						<comboitem label="4 ชั่วโมง (SA)" value="1" />
+						<comboitem label="4 ชั่วโมง (EO)" value="6"/>
+						<comboitem label="24 นาท (SA)" value="7"/>
+					</combobox>
+			</hlayout>
+			
+			
+			<hlayout>
+				<hlayout width="185px"/>
+				<button id="btnReport" label="ดูรายงาน" width="100px" height="35px" onClick="report.onPrint()"/>
+			</hlayout>
+
+		</vlayout>
+		
+	</east>
+</borderlayout>
+</window>
+<!-- Info -->
+	<window id="Window_PopUp" border="normal" closable="true" visible="false" onClose="event.stopPropagation();self.setVisible(false);" />
+
+	<!-- In Process-->
+	<window id="WinProcess" border="normal" width="175px" height="175px" visible="false" onClick="self.setVisible(false);">
+		<div align="center">
+			<image src="/images/loading3_3.gif" width="2000px" height="200px" />
+		</div>
+	</window>
+
+</zk>
